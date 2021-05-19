@@ -61,6 +61,10 @@ class PropertyController extends AbstractController
 
         if ($property_edit_form->isSubmitted() && $property_edit_form->isValid()) {
             $manager->flush();
+
+            $this->addFlash('success', 'Your property is added successfully');
+
+            return $this->redirectToRoute('app_property_list');
         }
 
         return $this->render('property/edit.html.twig', [

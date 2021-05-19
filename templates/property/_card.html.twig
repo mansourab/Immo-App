@@ -3,10 +3,12 @@
         {# {% include 'property/_card.html.twig' %} #}
 
         <div class="card" style="width: 22rem;">
+        <img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb') }}" alt="{{ property.title }}">
           <div class="card-body">
             <h5 class="card-title"> {{ property.title }} </h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="{{ path('app_property_show', {id: property.id}) }}" class="btn btn-primary">Show</a>
+            <a href="{{ path('app_property_show', {id: property.id}) }}" class="btn btn-primary">Show</a> 
+            <a href="{{ path('app_property_edit', {id: property.id}) }}" class="btn btn-secondary">edit</a> 
           </div>
         </div>
     </div>
