@@ -1,0 +1,14 @@
+
+{% extends 'frontend/base.html.twig' %}
+
+{% block title 'Listing All Properties' %}
+
+{% block body %}
+
+    <h2 class="mt-4 mb-4 text-center">List of properties</h2>
+
+    <div class="row">
+        {% include 'property/_card.html.twig' %}
+    </div>
+
+{% endblock %}

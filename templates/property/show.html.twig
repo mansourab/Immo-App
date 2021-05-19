@@ -1,0 +1,12 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title 'Show the property details' %}
+
+{% block body %}
+
+    <h4 class="mt-4 mb-4">{{ property.title }}</h4>
+    <p>
+        {{ property.content }}
+    </p>
+       
+{% endblock %}

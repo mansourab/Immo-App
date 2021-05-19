@@ -18,7 +18,13 @@
 
         {% include 'frontend/layouts/navbar.html.twig' %}
 
-        {% block body %}{% endblock %}
+
+        <div class="container">
+            {% include 'frontend/layouts/flash.html.twig' %} 
+            
+            {% block body %}{% endblock %}
+        </div>
+
 
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
