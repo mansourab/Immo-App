@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\PropertyRepository;
 use App\Traits\Timestempable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -47,6 +49,16 @@ class Property
      * @var File|null
      */
     private $imageFile;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="properties")
+     */
+    private $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
     
 
     public function getId(): ?int
@@ -113,5 +125,34 @@ class Property
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }

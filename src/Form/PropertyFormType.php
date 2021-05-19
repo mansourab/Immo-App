@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Property;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,6 +31,13 @@ class PropertyFormType extends AbstractType
                 'download_uri' => false,
                 'image_uri' => false,
                 'asset_helper' => false,
+            ])
+            ->add('categories', EntityType::class, [
+                'required' => false,
+                'label' => 'Choose Categories',
+                'class' => Category::class,
+                // 'expanded' => true,
+                'multiple' => true,
             ])
         ;
     }
