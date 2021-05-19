@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 class PropertyController extends AbstractController
 {
@@ -18,11 +19,20 @@ class PropertyController extends AbstractController
     /**
      * @Route("/property/list", name="app_property_list")
      */
-    public function list_property(PropertyRepository $propertyRepository): Response
+    public function list_property(PropertyRepository $propertyRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $properties = $propertyRepository->findAll();
+        // $properties = $propertyRepository->findAll();
 
-        return $this->render('property/index.html.twig', compact('properties'));
+        $properties = $paginator->paginate(
+            $propertyRepository->findAll(),
+            $request->query->getInt('page', 1),
+            3
+        );
+
+        return $this->render('property/index.html.twig', [
+            // 'pagination' => $pagination,
+            'properties' => $properties
+        ]);
     }
 
 

@@ -4,6 +4,8 @@
 
 {% block body %}
 
+    <img src="{{ vich_uploader_asset(property) | imagine_filter('my_property_detail_thumb') }}" alt="{{ property.title }}">
+
     <h4 class="mt-4 mb-4">{{ property.title }}</h4>
     <p>
         {{ property.content }}
