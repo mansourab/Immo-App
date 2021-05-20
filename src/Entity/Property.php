@@ -12,6 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
+ * @ORM\Table(name="property", indexes={@ORM\Index(columns={"title"}, flags={"fulltext"})})
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
@@ -54,6 +55,11 @@ class Property
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="properties")
      */
     private $categories;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Quarter::class, inversedBy="properties")
+     */
+    private $quarter;
 
     public function __construct()
     {
@@ -154,5 +160,17 @@ class Property
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getQuarter(): ?Quarter
+    {
+        return $this->quarter;
+    }
+
+    public function setQuarter(?Quarter $quarter): self
+    {
+        $this->quarter = $quarter;
+
+        return $this;
     }
 }
