@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Owner;
 use App\Entity\Property;
 use App\Entity\Quarter;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -44,6 +45,11 @@ class PropertyFormType extends AbstractType
                 'required' => false,
                 'label' => 'Lieu',
                 'class' => Quarter::class,
+            ])
+            ->add('owner', EntityType::class, [
+                'required' => false,
+                'label' => 'Le propriétaire',
+                'class' => Owner::class
             ])
         ;
     }

@@ -61,6 +61,11 @@ class Property
      */
     private $quarter;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Owner::class, inversedBy="properties")
+     */
+    private $owner;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -170,6 +175,18 @@ class Property
     public function setQuarter(?Quarter $quarter): self
     {
         $this->quarter = $quarter;
+
+        return $this;
+    }
+
+    public function getOwner(): ?Owner
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?Owner $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }
