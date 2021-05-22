@@ -6,9 +6,14 @@
         <img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb') }}" alt="{{ property.title }}">
           <div class="card-body">
             <h5 class="card-title">{{ property.title }}</h5>
+            Catégorie:
             {% for category in property.categories %}
-              <span class="card-text text-danger">{{ category.name }} | </span>
+               <span class="card-text text-danger"> {{ category.name }} |</span>
             {% endfor %}
+
+              <div> Lieu: {{property.quarter.name }}</div>
+
+
             <p class="mt-4">
               <a href="{{ path('app_property_show', {id: property.id}) }}" class="btn btn-primary">Show</a> 
               <a href="{{ path('app_property_edit', {id: property.id}) }}" class="btn btn-secondary">edit</a>

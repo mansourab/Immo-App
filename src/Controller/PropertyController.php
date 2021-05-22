@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Property;
 use App\Form\PropertyFormType;
+use App\Form\SearchForm;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,9 +31,18 @@ class PropertyController extends AbstractController
             3
         );
 
+        // $data = new SearchData;
+
+        // $data->page = $request->get('page', 1);
+
+        // $form = $this->createForm(SearchForm::class, $data);
+        // $form->handleRequest($request);
+
+        // $properties = $propertyRepository->findSearch($data);
+
         return $this->render('property/index.html.twig', [
-            // 'pagination' => $pagination,
-            'properties' => $properties
+            'properties' => $properties,
+            // 'form' => $form->createView(),
         ]);
     }
 
@@ -91,4 +102,48 @@ class PropertyController extends AbstractController
             'property' => $property
         ]);
     }
+
+    // /**
+    //  * @Route("/search/results", name="app_search_results")
+    //  */
+    // public function search_results(PropertyRepository $propertyRepository, PaginatorInterface $paginator, Request $request): Response
+    // {
+    //     $data = new SearchData;
+
+    //     $data->page = $request->get('page', 1);
+
+    //     $form = $this->createForm(SearchForm::class, $data);
+    //     $form->handleRequest($request);
+
+    //     $properties = $propertyRepository->findSearch($data);
+
+    //     return $this->render('search/index.html.twig', [
+    //         'properties' => $properties,
+    //         'form' => $form->createView(),
+    //     ]);
+    // }
+
+    // /**
+    //  * @Route("/search")
+    //  */
+    // public function search(Request $request, PropertyRepository $propertyRepository)
+    // {
+    //     $data = new SearchData;
+
+    //     $data->page = $request->get('page', 1);
+
+    //     $form = $this->createForm(SearchForm::class, $data);
+    //     $form->handleRequest($request);
+
+    //     $properties = $propertyRepository->findSearch($data);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         return $this->redirectToRoute('app_search_results');
+    //     }
+
+    //     return $this->render('search/init.html.twig', [
+    //         'form' => $form->createView(),
+    //         'properties' => $properties
+    //     ]);
+    // }
 }

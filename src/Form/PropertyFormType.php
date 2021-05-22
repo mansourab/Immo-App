@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Property;
+use App\Entity\Quarter;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -38,6 +39,11 @@ class PropertyFormType extends AbstractType
                 'class' => Category::class,
                 // 'expanded' => true,
                 'multiple' => true,
+            ])
+            ->add('quarter', EntityType::class, [
+                'required' => false,
+                'label' => 'Lieu',
+                'class' => Quarter::class,
             ])
         ;
     }
