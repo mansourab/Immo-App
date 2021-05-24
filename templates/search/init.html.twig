@@ -1,6 +1,5 @@
 {% extends 'frontend/base.html.twig' %}
 
-
 {% block body %}
 
     <h2 class="mt-4 mb-4 text-center">Results</h2>
@@ -9,6 +8,5 @@
         {{ form_row(form.q) }}
         <a href=" {{ path('app_search_results') }} ">Rechercher</a>
     {{ form_end(form) }}
-
 
 {% endblock %}

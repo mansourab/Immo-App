@@ -17,8 +17,6 @@ class AdminController extends AbstractController
      */
     public function index(PropertyRepository $repo, PaginatorInterface $paginator, Request $request)
     {
-        // $properties = $repo->findAll();
-
         $properties = $paginator->paginate(
             $repo->findAll(),
             $request->query->getInt('page', 1),
