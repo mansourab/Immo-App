@@ -17,6 +17,19 @@ liip_imagine:
 
                     # crop the input image, if required
                     mode: outbound
+
+        rent_thumb:
+            filters:
+
+                # use and setup the "thumbnail" filter
+                thumbnail:
+
+                    # set the thumbnail size to "32x32" pixels
+                    size: [290, 342]
+
+                    # crop the input image, if required
+                    mode: outbound
+
         my_property_detail_thumb:
             filters:
 

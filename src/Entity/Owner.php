@@ -43,6 +43,7 @@ class Owner
      * @ORM\OneToMany(targetEntity=Property::class, mappedBy="owner")
      */
     private $properties;
+    
 
     public function __construct()
     {

@@ -6,9 +6,34 @@
 
     <img src="{{ vich_uploader_asset(property) | imagine_filter('my_property_detail_thumb') }}" alt="{{ property.title }}">
 
+
     <h4 class="mt-4 mb-4">{{ property.title }}</h4>
     <p>
         {{ property.content }}
     </p>
+
+    <h3>Galerie</h3>
+
+	{% for key, image in property.images %}
+	    <div class="row">
+	    {% if key == 0 %}
+    		<div class="col-md-6">
+    			<img src="{{ asset('uploads/galerie/'~image.url) }}" alt="" width="600px;">
+    		</div>
+		{% endif %}
+        {% if key == 1 %}
+    		<div class="col-md-3 mb-2">
+    			<img src="{{ asset('uploads/galerie/'~image.url) }}" alt="" width="400px;">
+    		</div>
+		{% endif %}
+    		<div class="col-md-3">
+			{% if key == 2 %}
+    			<img src="{{ asset('uploads/galerie/'~image.url) }}" alt="" width="400px;">
+			{% endif %}
+    		</div>
+	    </div>	
+	{% endfor %}
+
+    
        
 {% endblock %}

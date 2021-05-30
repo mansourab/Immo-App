@@ -8,6 +8,7 @@ use App\Entity\Property;
 use App\Entity\Quarter;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -50,6 +51,12 @@ class PropertyFormType extends AbstractType
                 'required' => false,
                 'label' => 'Le propriétaire',
                 'class' => Owner::class
+            ])
+            ->add('images', FileType::class, [
+                'label' => 'Upload Files',
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false
             ])
         ;
     }
