@@ -40,46 +40,58 @@ class PropertyRepository extends ServiceEntityRepository
         );
     }
 
-    // public function findMinMax(SearchData $search): array
-    // {
-    //     $results = $this->getSearchQuery($search, true)
-    //         ->select('MIN(p.price) as min', 'MAX(p.price) as max')
-    //         ->getQuery()
-    //         ->getScalarResult()
-    //     ;
+    public function findMinMax(SearchData $search): array
+    {
+        $results = $this->getSearchQuery($search, true)
+            ->select('MIN(p.price) as min', 'MAX(p.price) as max')
+            ->getQuery()
+            ->getScalarResult()
+        ;
 
-    //     return [(int)$results[0]['min'], (int)$results[0]['max']];
-    // }
+        return [(int)$results[0]['min'], (int)$results[0]['max']];
+    }
  
     private function getSearchQuery(SearchData $search, $ignorePrice = false) 
     {
         $query = $this
             ->createQueryBuilder('p')
-            ->select('p', 'c', 'q')
+            ->select('p', 'c', 'l')
             ->join('p.categories', 'c')
-            ->join('p.quarter', 'q')
+            ->join('p.quarter', 'l')
+
         ;
+
+
+        if (!empty($search->q)) {
+            $query = $query  
+                ->andWhere('p.title LIKE :q')
+                ->setParameter('q', "%{$search->q}%")
+            ;
+        }
+
 
         if (!empty($search->quarter)) {
             $query = $query  
-                ->andWhere('q.name LIKE :q')
+                ->andWhere('l.name LIKE :q')
                 ->setParameter('q', "%{$search->quarter}%")
             ;
         }
 
-        // if (!empty($search->min) && $ignorePrice === false) {
-        //     $query = $query  
-        //         ->andWhere('p.price >= :min')
-        //         ->setParameter('min', $search->min)
-        //     ;
-        // }
 
-        // if (!empty($search->max) && $ignorePrice === false) {
-        //     $query = $query  
-        //         ->andWhere('p.price <= :max')
-        //         ->setParameter('max', $search->max)
-        //     ;
-        // }
+        if (!empty($search->min) && $ignorePrice === false) {
+            $query = $query  
+                ->andWhere('p.price >= :min')
+                ->setParameter('min', $search->min)
+            ;
+        }
+
+
+        if (!empty($search->max) && $ignorePrice === false) {
+            $query = $query  
+                ->andWhere('p.price <= :max')
+                ->setParameter('max', $search->max)
+            ;
+        }
 
         if (!empty($search->categories)) {
             $query = $query  

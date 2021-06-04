@@ -23,7 +23,7 @@ class Image
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Property::class, inversedBy="images", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Property::class, inversedBy="images")
      */
     private $property;
     

@@ -18,13 +18,13 @@ class SearchForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('q', TextType::class, [
-            //     'label' => false,
-            //     'required' => false,
-            //     'attr' => [
-            //         'placeholder' => 'Rechercher'
-            //     ]
-            // ])
+            ->add('q', TextType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Rechercher'
+                ]
+            ])
             ->add('categories', EntityType::class, [
                 'label' => false,
                 'required' => false,
@@ -36,21 +36,22 @@ class SearchForm extends AbstractType
                 'label' => 'Location',
                 'required' => false,
                 'class' => Quarter::class,
+                'placeholder' => 'Choisissez un quartier'
             ])
-            // ->add('min', NumberType::class, [
-            //     'label' => false,
-            //     'required' => false, 
-            //     'attr' => [
-            //         'placeholder' => 'Prix min'
-            //     ]
-            // ])
-            // ->add('max', NumberType::class, [
-            //     'label' => false,
-            //     'required' => false,
-            //     'attr' => [
-            //         'placeholder' => 'Prix max'
-            //     ]
-            // ])
+            ->add('min', NumberType::class, [
+                'label' => false,
+                'required' => false, 
+                'attr' => [
+                    'placeholder' => 'Prix min'
+                ]
+            ])
+            ->add('max', NumberType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Prix max'
+                ]
+            ])
         ;
     }
 

@@ -12,7 +12,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
- * @ORM\Table(name="property", indexes={@ORM\Index(columns={"title"}, flags={"fulltext"})})
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
@@ -67,9 +66,49 @@ class Property
     private $owner;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="property", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="property", cascade={"persist", "remove"})
      */
     private $images;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $area;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $room;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $published;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="properties")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="properties")
+     */
+    private $type;
 
     
     public function __construct()
@@ -169,10 +208,6 @@ class Property
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->title;
-    }
 
     public function getQuarter(): ?Quarter
     {
@@ -226,5 +261,107 @@ class Property
         }
 
         return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getArea(): ?int
+    {
+        return $this->area;
+    }
+
+    public function setArea(?int $area): self
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    public function getRoom(): ?int
+    {
+        return $this->room;
+    }
+
+    public function setRoom(int $room): self
+    {
+        $this->room = $room;
+
+        return $this;
+    }
+
+    public function getPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(bool $published): self
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    
+    public function __toString()
+    {
+        return $this->title;
     }
 }

@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\QuarterRepository;
+use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=QuarterRepository::class)
+ * @ORM\Entity(repositoryClass=TypeRepository::class)
  */
-class Quarter
+class Type
 {
     /**
      * @ORM\Id
@@ -25,10 +25,9 @@ class Quarter
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Property::class, mappedBy="quarter")
+     * @ORM\OneToMany(targetEntity=Property::class, mappedBy="type")
      */
     private $properties;
-    
 
     public function __construct()
     {
@@ -64,7 +63,7 @@ class Quarter
     {
         if (!$this->properties->contains($property)) {
             $this->properties[] = $property;
-            $property->setQuarter($this);
+            $property->setType($this);
         }
 
         return $this;
@@ -74,16 +73,11 @@ class Quarter
     {
         if ($this->properties->removeElement($property)) {
             // set the owning side to null (unless already changed)
-            if ($property->getQuarter() === $this) {
-                $property->setQuarter(null);
+            if ($property->getType() === $this) {
+                $property->setType(null);
             }
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->name;
     }
 }

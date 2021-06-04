@@ -4,6 +4,7 @@ liip_imagine:
     # driver: "gd"
     driver: "gd"
     filter_sets:
+        cache: ~
 
         # name our filter set "my_thumb_filter"
         my_card_thumb:

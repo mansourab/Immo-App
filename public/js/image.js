@@ -1,10 +1,6 @@
-console.log('Yes');
-
 // Effacer les images de la galerie en ajax
 window.onload = () => {
     let links = document.querySelectorAll("[data-delete]");
-
-    console.log(links);
 
     for (link of links) {
         link.addEventListener("click", function(e) {

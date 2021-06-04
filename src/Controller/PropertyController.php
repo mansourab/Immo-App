@@ -19,13 +19,39 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class PropertyController extends AbstractController
 {
     /**
-     * @Route("/property/list", name="app_property_list")
+     * @var PropertyRepository
      */
-    public function list_property(PropertyRepository $propertyRepository, PaginatorInterface $paginator, Request $request): Response
+    private $repo;
+
+    /**
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $manager;
+
+
+    public function __construct(PropertyRepository $propertyRepository, PaginatorInterface $paginator, EntityManagerInterface $manager)
+    {
+        $this->repo = $propertyRepository;
+        $this->paginator = $paginator;
+        $this->manager = $manager;
+    }
+
+
+    /**
+     * @Route("/property/list", name="app_property_list")
+     * @param Symfony\Component\HttpFoundation\Request
+     * @return Symfony\Component\HttpFoundation\Response
+     */
+    public function list_property(Request $request): Response
     {
 
-        $properties = $paginator->paginate(
-            $propertyRepository->findAll(),
+        $properties = $this->paginator->paginate(
+            $this->repo->findAll(),
             $request->query->getInt('page', 1),
             3
         );
@@ -48,8 +74,10 @@ class PropertyController extends AbstractController
 
     /**
      * @Route("/property/new", name="app_property_new", methods={"GET", "POST"})
+     * 
+     * @return Symfony\Component\HttpFoundation\Response
      */
-    public function new_property(Request $request, EntityManagerInterface $manager): Response
+    public function new_property(Request $request): Response
     {
         $property = new Property;
 
@@ -75,8 +103,8 @@ class PropertyController extends AbstractController
                 $property->addImage($img);
             }
 
-            $manager->persist($property);
-            $manager->flush();
+            $this->manager->persist($property);
+            $this->manager->flush();
 
             $this->addFlash('success', 'Your property is added successfully');
 
@@ -90,8 +118,10 @@ class PropertyController extends AbstractController
 
     /**
      * @Route("/property/edit/{id}", name="app_property_edit")
+     * @param Symfony\Component\HttpFoundation\Request
+     * @param App\Entity\Property
      */
-    public function edit_property(Property $property, Request $request, EntityManagerInterface $manager, PropertyRepository $repo): Response
+    public function edit_property(Property $property, Request $request): Response
     {
 
         $property_edit_form = $this->createForm(PropertyFormType::class, $property);
@@ -117,7 +147,7 @@ class PropertyController extends AbstractController
                 $property->addImage($img);
             }
 
-            $manager->flush();
+            $this->manager->flush();
 
             $this->addFlash('success', 'Your property is updated successfully');
             return $this->redirectToRoute('app_property_list');
@@ -142,7 +172,7 @@ class PropertyController extends AbstractController
     /**
      * @Route("/property/img/delete/{id}", name="app_property_galerie", methods={"DELETE"})
      */
-    public function deleteImage(Image $image, Request $request)
+    public function delete_image(Image $image, Request $request)
     {
         $data = json_decode($request->getContent(), true);
 
@@ -170,7 +200,7 @@ class PropertyController extends AbstractController
     /**
      * @Route("/search/results", name="app_search_results")
      */
-    public function search_results(PropertyRepository $repo, PaginatorInterface $paginator, Request $request): Response
+    public function search_results(Request $request): Response
     {
         $data = new SearchData;
 
@@ -181,7 +211,15 @@ class PropertyController extends AbstractController
 
         // [$min, $max] = $repo->findMinMax($data);
 
-        $properties = $repo->findSearch($data);
+        $properties = $this->repo->findSearch($data);
+
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('search/_properties.html.twig', ['properties' => $properties]),
+                'sorting' => $this->renderView('search/_sorting.html.twig', ['properties' => $properties]),
+                'pagination' => $this->renderView('search/_pagination.html.twig', ['properties' => $properties])
+            ]);
+        }
 
         return $this->render('search/index.html.twig', [
             'properties' => $properties,
@@ -190,6 +228,21 @@ class PropertyController extends AbstractController
             // 'max' => $max
         ]);
     }
+
+    /**
+     * @Route("/property/{id}", name="app_property_delete", methods={"POST"})
+     */
+    public function delete_property(Request $request, Property $property)
+    {
+        if ($this->isCsrfTokenValid('delete'.$property->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($property);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_property_list');
+    }
+
 
     // /**
     //  * @Route("/search")

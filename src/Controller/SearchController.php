@@ -9,8 +9,8 @@ class SearchController extends AbstractController
 {
 
 
-    public function index()
-    {
-        $data = new SearchData;
-    }
+    // public function index()
+    // {
+    //     $data = new SearchData;
+    // }
 }

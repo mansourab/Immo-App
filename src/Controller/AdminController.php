@@ -14,6 +14,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/index", name="app_admin_index")
+     * 
      */
     public function index(PropertyRepository $repo, PaginatorInterface $paginator, Request $request)
     {
