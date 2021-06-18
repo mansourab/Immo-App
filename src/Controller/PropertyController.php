@@ -9,12 +9,14 @@ use App\Form\PropertyFormType;
 use App\Form\SearchForm;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class PropertyController extends AbstractController
 {
@@ -42,38 +44,37 @@ class PropertyController extends AbstractController
     }
 
 
+//    /**
+//     * @param Symfony\Component\HttpFoundation\Request
+//     * @return Symfony\Component\HttpFoundation\Response
+//     */
+//    public function index(Request $request): Response
+//    {
+//
+//        $properties = $this->paginator->paginate(
+//            $this->repo->findAll(),
+//            $request->query->getInt('page', 1),
+//            3
+//        );
+//
+//        // $data = new SearchData;
+//
+//        // $data->page = $request->get('page', 1);
+//
+//        // $form = $this->createForm(SearchForm::class, $data);
+//        // $form->handleRequest($request);
+//
+//        // $properties = $propertyRepository->findSearch($data);
+//
+//        return $this->render('backend/admin/property/index.html.twig', [
+//            'properties' => $properties,
+//            // 'form' => $form->createView(),
+//        ]);
+//    }
+
+
     /**
-     * @Route("/property/list", name="app_property_list")
-     * @param Symfony\Component\HttpFoundation\Request
-     * @return Symfony\Component\HttpFoundation\Response
-     */
-    public function list_property(Request $request): Response
-    {
-
-        $properties = $this->paginator->paginate(
-            $this->repo->findAll(),
-            $request->query->getInt('page', 1),
-            3
-        );
-
-        // $data = new SearchData;
-
-        // $data->page = $request->get('page', 1);
-
-        // $form = $this->createForm(SearchForm::class, $data);
-        // $form->handleRequest($request);
-
-        // $properties = $propertyRepository->findSearch($data);
-
-        return $this->render('property/index.html.twig', [
-            'properties' => $properties,
-            // 'form' => $form->createView(),
-        ]);
-    }
-
-
-    /**
-     * @Route("/property/new", name="app_property_new", methods={"GET", "POST"})
+     * @Route("admin/property/new", name="app_property_new", methods={"GET", "POST"})
      * 
      * @return Symfony\Component\HttpFoundation\Response
      */
@@ -117,7 +118,7 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/property/edit/{id}", name="app_property_edit")
+     * @Route("admin/property/edit/{id}", name="app_property_edit")
      * @param Symfony\Component\HttpFoundation\Request
      * @param App\Entity\Property
      */
@@ -150,10 +151,10 @@ class PropertyController extends AbstractController
             $this->manager->flush();
 
             $this->addFlash('success', 'Your property is updated successfully');
-            return $this->redirectToRoute('app_property_list');
+            return $this->redirectToRoute('app_admin_index');
         }
 
-        return $this->render('property/edit.html.twig', [
+        return $this->render('backend/admin/property/edit.html.twig', [
             'property' => $property,
             'property_edit_form' => $property_edit_form->createView(),
         ]);
@@ -213,13 +214,14 @@ class PropertyController extends AbstractController
 
         $properties = $this->repo->findSearch($data);
 
-        if ($request->get('ajax')) {
-            return new JsonResponse([
-                'content' => $this->renderView('search/_properties.html.twig', ['properties' => $properties]),
-                'sorting' => $this->renderView('search/_sorting.html.twig', ['properties' => $properties]),
-                'pagination' => $this->renderView('search/_pagination.html.twig', ['properties' => $properties])
-            ]);
-        }
+        // if ($request->get('ajax')) {
+        //     return new JsonResponse([
+        //         'content' => $this->renderView('search/_properties.html.twig', ['properties' => $properties]),
+        //         'sorting' => $this->renderView('search/_sorting.html.twig', ['properties' => $properties]),
+        //         'pagination' => $this->renderView('search/_pagination.html.twig', ['properties' => $properties])
+        //     ]);
+        // }
+
 
         return $this->render('search/index.html.twig', [
             'properties' => $properties,

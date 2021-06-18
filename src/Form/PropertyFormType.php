@@ -6,9 +6,11 @@ use App\Entity\Category;
 use App\Entity\Owner;
 use App\Entity\Property;
 use App\Entity\Quarter;
+use App\Entity\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,6 +31,7 @@ class PropertyFormType extends AbstractType
                 'label' => 'Property Description'
             ])
             ->add('imageFile', VichImageType::class, [
+                'label' => 'Cover Image (png, jpeg, jpg)',
                 'required' => false,
                 'allow_delete' => false,
                 'download_uri' => false,
@@ -50,7 +53,7 @@ class PropertyFormType extends AbstractType
             ])
             ->add('owner', EntityType::class, [
                 'required' => false,
-                'label' => 'Le propriétaire',
+                'label' => 'Property Owner',
                 'class' => Owner::class
             ])
             ->add('images', FileType::class, [
@@ -58,6 +61,27 @@ class PropertyFormType extends AbstractType
                 'multiple' => true,
                 'mapped' => false,
                 'required' => false
+            ])
+            ->add('price', NumberType::class, [
+                'label' => 'Property Price',
+                'required' => false,
+            ])
+            ->add('area', NumberType::class, [
+                'label' => 'Property Area',
+                'required' => false,
+            ])
+            ->add('room', NumberType::class, [
+                'label' => 'Property Rooms',
+                'required' => false,
+            ])
+            ->add('type', EntityType::class, [
+                'required' => false,
+                'label' => 'Property Type',
+                'class' => Type::class
+            ])
+            ->add('status', TextType::class, [
+                'required' => false,
+                'label' => 'Property Status'
             ])
         ;
     }

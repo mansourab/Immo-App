@@ -1,0 +1,38 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block body %}
+	
+<main id="content">
+	{# Bredcrumb #}
+{# 	<section class="pb-8 page-title shadow">
+		<div class="container">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb pt-6 pt-lg-2 lh-15 pb-5">
+				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Listing</li>
+				</ol>
+				<h1 class="fs-30 lh-1 mb-0 text-heading font-weight-600">Listing Grid With Left Filter</h1>
+			</nav>
+		</div>
+	</section> #}
+
+	<section class="pt-8 pb-11">
+		<div class="container">
+			<div class="row">
+				{# Filter Side #}
+				{% include 'frontend/properties/left_side.html.twig' %}
+
+				{# Listing #}
+				{% include 'frontend/properties/listing.html.twig' %}
+			</div>
+		</div>
+	</section>
+</main>
+
+<div class="position-fixed pos-fixed-bottom-right p-6 z-index-10">
+	<a href="#" class="gtf-back-to-top bg-white text-indigo hover-white bg-hover-indigo shadow p-0 w-52px h-52 rounded-circle fs-20 d-flex align-items-center justify-content-center" title="Back To Top">
+		<i class="fal fa-arrow-up"></i>
+	</a>
+</div>
+
+{% endblock %}

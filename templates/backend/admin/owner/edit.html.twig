@@ -1,0 +1,43 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper dashboard-wrapper">
+        <div class="d-flex flex-wrap flex-xl-nowrap">
+            {# Sidebar #}
+                {% include 'backend/admin/sidebar.html.twig' %}
+            {# EndSidebar #}
+
+            <div class="page-content">
+                    
+                {# Header #}
+                    {% include 'backend/admin/layouts/header.html.twig' %}
+                {# EndHeader #}
+
+                <main id="content" class="bg-gray-01">
+                    <div class="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
+                        <div class="tab-content shadow-none p-0">
+                            <div class="card-body py-4 py-md-0 px-0">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card mb-6">
+                                            <div class="card-body p-6">
+                                                <h3 class="card-title mb-0 text-heading fs-22 lh-15 mb-4">
+                                                    Editer les infos du propriétaire
+                                                </h3>                                                
+                                                {{ include('backend/admin/owner/_form.html.twig', {'button_label': 'Update'}) }}
+                                            </div>
+                                        </div>
+                                    </div>                                       
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ path('app_owner_index') }}">back to list</a>
+
+    {{ include('backend/admin/owner/_delete_form.html.twig') }}
+{% endblock %}

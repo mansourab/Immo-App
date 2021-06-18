@@ -1,0 +1,66 @@
+<div class="col-lg-8 mb-8 mb-lg-0 order-1 order-lg-2">
+    
+    {# Properties Row #}
+    <div class="row">
+        {% for property in properties %}
+        <div class="col-md-6 mb-6">
+            <div class="card border-0">
+                <div class="position-relative rounded-lg card-img">
+                    <a href="{{path('app_annonce_detail', {id: property.id})}}">
+                        <img src="{{ vich_uploader_asset(property) | imagine_filter('my_home_card') }}" alt="{{ property.title }}">
+                        <div class="card-img-overlay d-flex flex-column">
+                            <div>
+                                <span class="badge badge-{% if property.type == 'location'%}indigo{% else %}orange{% endif %}">
+                                    {{ property.type }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card-body pt-3 px-0 pb-1">
+                    <h2 class="fs-16 mb-1">
+                        <a href="{{path('app_annonce_detail', {id: property.id})}}" class="text-dark hover-indigo">
+                            {{property.title}}
+                        </a>
+                    </h2>
+                    <p class="font-weight-500 text-gray-light mb-0">
+                        1421 San Pedro St, {{property.quarter}}
+                    </p>
+                    <p class="fs-17 font-weight-bold text-heading mb-0 lh-16">
+                        {{ property.price | number_format(0, ',', '.') }} Fcfa
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent px-0 pb-0 pt-2">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item text-gray font-weight-500 fs-13 mr-sm-7" data-toggle="tooltip" title="3 Bedroom">
+                            <svg class="icon icon-bedroom fs-18 text-primary mr-1">
+                                <use xlink:href="#icon-bedroom"></use>
+                            </svg>
+                            3 Br
+                        </li>
+                        <li class="list-inline-item text-gray font-weight-500 fs-13 mr-sm-7" data-toggle="tooltip" title="3 Bathrooms">
+                            <svg class="icon icon-shower fs-18 text-primary mr-1">
+                                <use xlink:href="#icon-shower"></use>
+                            </svg>
+                            3 Ba
+                         </li>
+                        <li class="list-inline-item text-gray font-weight-500 fs-13" data-toggle="tooltip" title="Size">
+                            <svg class="icon icon-square fs-18 text-primary mr-1">
+                                <use xlink:href="#icon-square"></use>
+                            </svg>
+                            2300 Sq.Ft
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {# End Properties Row #}
+
+    {# Pagination #}
+
+    {{ knp_pagination_render(properties, 'frontend/layouts/pagination.html.twig') }}
+
+
+</div>

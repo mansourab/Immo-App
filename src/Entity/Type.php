@@ -29,6 +29,7 @@ class Type
      */
     private $properties;
 
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
@@ -79,5 +80,10 @@ class Type
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

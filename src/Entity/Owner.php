@@ -104,10 +104,6 @@ class Owner
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->name;
-    }
 
     /**
      * @return Collection|Property[]
@@ -137,6 +133,12 @@ class Owner
         }
 
         return $this;
+    }
+
+    
+    public function __toString()
+    {
+        return $this->name;
     }
 
 }

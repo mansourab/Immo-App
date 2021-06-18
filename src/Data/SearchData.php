@@ -4,6 +4,7 @@ namespace App\Data;
 
 use App\Entity\Category;
 use App\Entity\Quarter;
+use App\Entity\Type;
 
 
 class SearchData
@@ -37,5 +38,10 @@ class SearchData
      * @var null|integer
      */
     public $max;
+
+    /**
+     * @var Type
+     */
+    public $type;
 
 }

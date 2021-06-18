@@ -1,0 +1,71 @@
+<aside class="col-lg-4 pl-xl-4 primary-sidebar sidebar-sticky" id="sidebar">
+    <div class="primary-sidebar-inner">
+        <div class="bg-white rounded-lg py-lg-6 pl-lg-6 pr-lg-3 p-4">
+            <ul class="list-inline d-sm-flex align-items-sm-center mb-2">
+                <li class="list-inline-item badge badge-orange mr-2">Featured</li>
+                <li class="list-inline-item badge badge-indigo mr-3">{{property.type}}</li>
+            </ul>
+            <h2 class="fs-22 text-heading pt-2">{{property.title}}</h2>
+            <p class="mb-2"><i class="fal fa-map-marker-alt mr-1"></i>398 Pete Pascale Pl, {{property.quarter | upper}}</p>
+            <div class="d-flex align-items-center">
+                <p class="fs-22 text-heading font-weight-bold mb-0 mr-6">{{property.price | number_format(0, ',', '.')}} Fcfa</p>
+                <p class="mb-0">$9350/SqFt</p>
+            </div>
+            <div class="row mt-5">
+                <div class="col-6 mb-3">
+                    <div class="media">
+                        <div class="p-2 shadow-xxs-1 rounded-lg mr-2 lh-1">
+                            <svg class="icon icon-bedroom fs-18 text-primary"><use xlink:href="#icon-bedroom"></use></svg>
+                        </div>
+                        <div class="media-body">
+                        <h5 class="fs-13 font-weight-normal mb-0">Bedrooms</h5>
+                        <p class="mb-0 fs-13 font-weight-bold text-dark">3</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-3">
+                    <div class="media">
+                        <div class="p-2 shadow-xxs-1 rounded-lg mr-2 lh-1">
+                            <svg class="icon icon-shower fs-18 text-primary"><use xlink:href="#icon-shower"></use></svg>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="fs-13 font-weight-normal mb-0">Bathrooms</h5>
+                            <p class="mb-0 fs-13 font-weight-bold text-dark">2</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-3">
+                    <div class="media">
+                        <div class="p-2 shadow-xxs-1 rounded-lg mr-2 lh-1">
+                            <svg class="icon icon-square fs-18 text-primary"><use xlink:href="#icon-square"></use></svg>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="fs-13 font-weight-normal mb-0">Area</h5>
+                            <p class="mb-0 fs-13 font-weight-bold text-dark">3.6k SqFt</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-3">
+                    <div class="media">
+                        <div class="p-2 shadow-xxs-1 rounded-lg mr-2 lh-1">
+                            <svg class="icon icon-Garage fs-18 text-primary"><use xlink:href="#icon-Garage"></use></svg>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="fs-13 font-weight-normal mb-0">Garage</h5>
+                            <p class="mb-0 fs-13 font-weight-bold text-dark">1</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <p class="mb-6 mt-1">Villa Called Archangel is now available to buy off plan in New Islington in Australia.</p>
+            <div class="mr-xl-2">
+                <a href="#" class="btn btn-outline-primary btn-lg btn-block rounded border text-body border-hover-primary hover-white">
+                    Schedule a Tour
+                </a>
+                <a href="#" class="btn btn-outline-primary btn-lg btn-block rounded border text-body border-hover-primary hover-white mt-4">
+                    Request Info
+                </a>
+            </div>
+        </div>
+    </div>
+</aside>

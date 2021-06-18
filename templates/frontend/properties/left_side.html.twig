@@ -1,0 +1,18 @@
+<div class="col-lg-4 order-2 order-lg-1 primary-sidebar sidebar-sticky" id="sidebar">
+	<div class="primary-sidebar-inner">
+		<div class="card mb-4">
+			<div class="card-body px-6 py-4">
+				<h4 class="card-title fs-16 lh-2 text-dark mb-3">Rechercher et Filtrer</h4>
+				
+				{% include 'frontend/properties/leftSide/form_filter.html.twig' %}
+
+			</div>
+		</div>
+
+		{% include 'frontend/properties/leftSide/featured.html.twig' %}
+
+			<div class="card">
+				{% include 'frontend/properties/leftSide/latest_posts.html.twig' %}
+			</div>
+	</div>
+</div>

@@ -1,40 +1,40 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="{{ path('app_home_index') }}">HAYA</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ path('app_property_list') }}">Properties</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_category_list') }}">Categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_owner_index') }}">Proprietaires</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_admin_index') }}">Admin</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="{{ path('app_login') }}" class="nav-link">Sign in</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('app_register') }}" class="nav-link">Sign up</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('app_search_results') }}" class="nav-link">Search</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('user_index') }}" class="nav-link">User</a>
-                </li>
-            </ul>
-            </div>
+<header class="main-header navbar-light header-sticky header-sticky-smart header-mobile-lg">
+    <div class="sticky-area">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg px-0">
+                <a class="navbar-brand" href="index-2.html">
+                    <img src="images/logo.png" alt="HomeID" class="d-none d-lg-inline-block">
+                    <img src="images/logo-white.png" alt="HomeID" class="d-inline-block d-lg-none">
+                </a>
+                <div class="d-flex d-lg-none ml-auto">
+                    <a class="mr-4 position-relative text-white p-2" href="#">
+                        {# <i class="fal fa-heart fs-large-4"></i>
+                        <span class="badge badge-primary badge-circle badge-absolute">1</span> #}
+                    </a>
+                    <button class="navbar-toggler border-0 px-0" type="button" data-toggle="collapse" data-target="#primaryMenu01" aria-controls="primaryMenu01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="text-white fs-24"><i class="fal fa-bars"></i></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse mt-3 mt-lg-0 mx-auto flex-grow-0" id="primaryMenu01">
+                    <ul class="navbar-nav {# hover-menu #} {# main-menu #} px-0 mx-lg-n4">
+                        <li id="navbar-item-home" {# aria-haspopup="true" aria-expanded="false" #} class="nav-item py-2 py-lg-5 px-0 px-lg-4">
+                            <a class="nav-link p-0" href="{{path('app_home_index')}}">Accueil</a>
+                        </li>
+                        <li id="navbar-item-property" aria-haspopup="true" aria-expanded="false" class="nav-item py-2 py-lg-5 px-0 px-lg-4">
+                            <a class="nav-link p-0" href="{{path('app_annonce_all')}}">Annonces Immobilières</a>
+                        </li>
+                        <li id="navbar-item-property" aria-haspopup="true" aria-expanded="false" class="nav-item py-2 py-lg-5 px-0 px-lg-4">
+                            <a class="nav-link p-0" href="#">Services</a>
+                        </li>
+                        <li id="navbar-item-property" aria-haspopup="true" aria-expanded="false" class="nav-item py-2 py-lg-5 px-0 px-lg-4">
+                            <a class="nav-link p-0" href="#">Blog</a>
+                        </li>
+                        <li id="navbar-item-property" aria-haspopup="true" aria-expanded="false" class="nav-item py-2 py-lg-5 px-0 px-lg-4">
+                            <a class="nav-link p-0" href="#">A propos</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </div>
-</nav>
+</header>

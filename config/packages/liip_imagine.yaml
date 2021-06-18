@@ -42,3 +42,20 @@ liip_imagine:
 
                     # crop the input image, if required
                     mode: outbound
+        my_home_card:
+            filters:
+                thumbnail:
+                    size: [385, 219]
+                    mode: outbound
+                    
+        my_galerie_image:
+            filters:
+                thumbnail:
+                    size: [285, 213]
+                    mode: outbound
+
+        admin_property_thumb:
+            filters:
+                thumbnail:
+                    size: [120, 85]
+                    mode: outbound

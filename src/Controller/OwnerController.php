@@ -14,17 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class OwnerController extends AbstractController
 {
     /**
-     * @Route("/owner/list", name="app_owner_index", methods={"GET"})
+     * @Route("admin/owner/list", name="app_owner_index", methods={"GET"})
      */
     public function index(OwnerRepository $ownerRepository): Response
     {
-        return $this->render('owner/index.html.twig', [
+        return $this->render('backend/admin/owner/index.html.twig', [
             'owners' => $ownerRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/owner/new", name="app_owner_new", methods={"GET","POST"})
+     * @Route("admin/owner/new", name="app_owner_new", methods={"GET","POST"})
      */
     public function new_owner(Request $request): Response
     {
@@ -41,24 +41,15 @@ class OwnerController extends AbstractController
             return $this->redirectToRoute('app_owner_index');
         }
 
-        return $this->render('owner/new.html.twig', [
+        return $this->render('backend/admin/owner/new.html.twig', [
             'owner' => $owner,
             'form' => $form->createView(),
         ]);
     }
 
-    /**
-     * @Route("/owner/{id}", name="app_owner_show", methods={"GET"})
-     */
-    public function show_owner(Owner $owner): Response
-    {
-        return $this->render('owner/show.html.twig', [
-            'owner' => $owner,
-        ]);
-    }
 
     /**
-     * @Route("/owner/{id}/edit", name="app_owner_edit", methods={"GET","POST"})
+     * @Route("admin/owner/{id}/edit", name="app_owner_edit", methods={"GET","POST"})
      */
     public function edit_owner(Request $request, Owner $owner): Response
     {
@@ -71,14 +62,14 @@ class OwnerController extends AbstractController
             return $this->redirectToRoute('app_owner_index');
         }
 
-        return $this->render('owner/edit.html.twig', [
+        return $this->render('backend/admin/owner/edit.html.twig', [
             'owner' => $owner,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/owner/{id}", name="app_owner_delete", methods={"POST"})
+     * @Route("admin/owner/{id}", name="app_owner_delete", methods={"POST"})
      */
     public function delete_owner(Request $request, Owner $owner): Response
     {

@@ -6,6 +6,7 @@ use App\Data\SearchData;
 use App\Entity\Property;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -36,7 +37,7 @@ class PropertyRepository extends ServiceEntityRepository
         return $this->paginator->paginate(
             $query,
             $search->page,
-            3
+            6
         );
     }
 
@@ -55,9 +56,10 @@ class PropertyRepository extends ServiceEntityRepository
     {
         $query = $this
             ->createQueryBuilder('p')
-            ->select('p', 'c', 'l')
+            ->select('p', 'c', 'l', 't')
             ->join('p.categories', 'c')
             ->join('p.quarter', 'l')
+            ->join('p.type', 't')
 
         ;
 
@@ -67,13 +69,20 @@ class PropertyRepository extends ServiceEntityRepository
                 ->andWhere('p.title LIKE :q')
                 ->setParameter('q', "%{$search->q}%")
             ;
-        }
+        } 
 
 
         if (!empty($search->quarter)) {
             $query = $query  
-                ->andWhere('l.name LIKE :q')
-                ->setParameter('q', "%{$search->quarter}%")
+                ->andWhere('l.name LIKE :l')
+                ->setParameter('l', "%{$search->quarter}%")
+            ;
+        }
+
+        if (!empty($search->type)) {
+            $query = $query  
+                ->andWhere('t.name LIKE :t')
+                ->setParameter('t', "%{$search->type}%")
             ;
         }
 
@@ -101,6 +110,28 @@ class PropertyRepository extends ServiceEntityRepository
         }
 
         return $query;
+    }
+
+    public function FindLatestProperties()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findLatestRent()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.type', 't')
+            ->andWhere('t.id = 2')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(8)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 }
