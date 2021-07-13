@@ -24,7 +24,7 @@ class AdminController extends AbstractController
             3
         );
 
-        return $this->render('backend/admin/index.html.twig', [
+        return $this->render('admin/index.html.twig', [
             'properties' => $properties
         ]);
     }

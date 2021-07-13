@@ -1,0 +1,32 @@
+<section class="dashboard section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+
+                {% include 'admin/partials/menu.html.twig' %}
+
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="main-content">
+
+                    <div class="dashboard-block mt-0">
+                        <h3 class="block-title">Modifier le type de bien</h3>
+                        <div class="inner-block">
+
+                            <div class="post-ad-tab">
+                                {{ form_start(form, {attr: {class: 'default-form-style'}}) }}
+                                    {{ form_row(form.name) }}
+                                <div class="button">
+                                    <button type="submit" class="btn">Update Type</button>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

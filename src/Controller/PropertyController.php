@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RequestStack;
+
 
 class PropertyController extends AbstractController
 {
@@ -43,38 +43,8 @@ class PropertyController extends AbstractController
         $this->manager = $manager;
     }
 
-
-//    /**
-//     * @param Symfony\Component\HttpFoundation\Request
-//     * @return Symfony\Component\HttpFoundation\Response
-//     */
-//    public function index(Request $request): Response
-//    {
-//
-//        $properties = $this->paginator->paginate(
-//            $this->repo->findAll(),
-//            $request->query->getInt('page', 1),
-//            3
-//        );
-//
-//        // $data = new SearchData;
-//
-//        // $data->page = $request->get('page', 1);
-//
-//        // $form = $this->createForm(SearchForm::class, $data);
-//        // $form->handleRequest($request);
-//
-//        // $properties = $propertyRepository->findSearch($data);
-//
-//        return $this->render('backend/admin/property/index.html.twig', [
-//            'properties' => $properties,
-//            // 'form' => $form->createView(),
-//        ]);
-//    }
-
-
     /**
-     * @Route("admin/property/new", name="app_property_new", methods={"GET", "POST"})
+     * @Route("property/new", name="app_property_new", methods={"GET", "POST"})
      * 
      * @return Symfony\Component\HttpFoundation\Response
      */
@@ -82,12 +52,12 @@ class PropertyController extends AbstractController
     {
         $property = new Property;
 
-        $property_create_form = $this->createForm(PropertyFormType::class, $property);
-        $property_create_form->handleRequest($request);
+        $form = $this->createForm(PropertyFormType::class, $property);
+        $form->handleRequest($request);
 
-        if ($property_create_form->isSubmitted() && $property_create_form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // Upload Image multiple
-            $images = $property_create_form->get('images')->getData();
+            $images = $form->get('images')->getData();
 
             // on boucle sur les images
             foreach($images as $image) {
@@ -109,29 +79,29 @@ class PropertyController extends AbstractController
 
             $this->addFlash('success', 'Your property is added successfully');
 
-            return $this->redirectToRoute('app_property_list');
+            return $this->redirectToRoute('app_admin_index');
         }
 
-        return $this->render('property/create.html.twig', [
-            'property_create_form' => $property_create_form->createView(),
+        return $this->render('admin/property/create/index.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("admin/property/edit/{id}", name="app_property_edit")
+     * @Route("property/edit/{id}", name="app_property_edit")
      * @param Symfony\Component\HttpFoundation\Request
      * @param App\Entity\Property
      */
     public function edit_property(Property $property, Request $request): Response
     {
 
-        $property_edit_form = $this->createForm(PropertyFormType::class, $property);
-        $property_edit_form->handleRequest($request);
+        $form = $this->createForm(PropertyFormType::class, $property);
+        $form->handleRequest($request);
 
-        if ($property_edit_form->isSubmitted() && $property_edit_form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             // Upload Image multiple
-            $images = $property_edit_form->get('images')->getData();
+            $images = $form->get('images')->getData();
 
             // on boucle sur les images
             foreach($images as $image) {
@@ -154,24 +124,15 @@ class PropertyController extends AbstractController
             return $this->redirectToRoute('app_admin_index');
         }
 
-        return $this->render('backend/admin/property/edit.html.twig', [
+        return $this->render('admin/property/edit/index.html.twig', [
             'property' => $property,
-            'property_edit_form' => $property_edit_form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
-    /**
-     * @Route("/property/show/{id}", name="app_property_show")
-     */
-    public function show_property(Property $property)
-    {
-        return $this->render('property/show.html.twig', [
-            'property' => $property
-        ]);
-    }
 
     /**
-     * @Route("/property/img/delete/{id}", name="app_property_galerie", methods={"DELETE"})
+     * @Route("/property/img/delete/{id}", name="app_galerie_delete", methods={"DELETE"})
      */
     public function delete_image(Image $image, Request $request)
     {
@@ -245,28 +206,4 @@ class PropertyController extends AbstractController
         return $this->redirectToRoute('app_property_list');
     }
 
-
-    // /**
-    //  * @Route("/search")
-    //  */
-    // public function search(Request $request, PropertyRepository $propertyRepository)
-    // {
-    //     $data = new SearchData;
-
-    //     $data->page = $request->get('page', 1);
-
-    //     $form = $this->createForm(SearchForm::class, $data);
-    //     $form->handleRequest($request);
-
-    //     $properties = $propertyRepository->findSearch($data);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         return $this->redirectToRoute('app_search_results');
-    //     }
-
-    //     return $this->render('search/init.html.twig', [
-    //         'form' => $form->createView(),
-    //         'properties' => $properties
-    //     ]);
-    // }
 }

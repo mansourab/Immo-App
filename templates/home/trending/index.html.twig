@@ -1,0 +1,124 @@
+<section class="items-tab section custom-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Les dernières annonces</h2>
+{#                    <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem#}
+{#                        Ipsum available, but the majority have suffered alteration in some form.</p>#}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-latest-tab" data-bs-toggle="tab" data-bs-target="#nav-latest" type="button" role="tab" aria-controls="nav-latest" aria-selected="true">Derniers ajouts</button>
+                        <button class="nav-link" id="nav-popular-tab" data-bs-toggle="tab" data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-popular" aria-selected="false">A louer</button>
+                        <button class="nav-link" id="nav-random-tab" data-bs-toggle="tab" data-bs-target="#nav-random" type="button" role="tab" aria-controls="nav-random" aria-selected="false">A vendre</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-latest" role="tabpanel" aria-labelledby="nav-latest-tab">
+                        <div class="row">
+
+                            {% for property in properties %}
+
+                            <div class="col-lg-3 col-md-4 col-12">
+
+                                <div class="single-item-grid">
+                                    <div class="image">
+                                        <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}"><img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb') }}" alt="#"></a>
+                                        <i class=" cross-badge lni lni-bolt"></i>
+                                        <span class="flat-badge sale">{{ property.type }}</span>
+                                    </div>
+                                    <div class="content">
+                                        {% for category in property.categories %}
+                                            <span class="tag">{{ category.name }}</span>
+                                        {% endfor %}
+                                        <h3 class="title">
+                                            <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
+                                        </h3>
+                                        <p class="location">
+                                            <span class="tag"><i class="lni lni-map-marker"></i> {{ property.quarter }}, Niamey</span>
+                                        </p>
+                                        <ul class="info">
+                                            <li class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</li>
+                                            <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-popular" role="tabpanel" aria-labelledby="nav-popular-tab">
+                        <div class="row">
+                            {% for property in properties %}
+
+                            <div class="col-lg-3 col-md-4 col-12">
+
+                                <div class="single-item-grid">
+                                    <div class="image">
+                                        <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}"><img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb') }}" alt="#"></a>
+                                        <i class=" cross-badge lni lni-bolt"></i>
+                                        <span class="flat-badge sale">{{ property.type }}</span>
+                                    </div>
+                                    <div class="content">
+                                        {% for category in property.categories %}
+                                        <span class="tag">{{ category.name }}</span>
+                                        {% endfor %}
+                                        <h3 class="title">
+                                            <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
+                                        </h3>
+                                        <p class="location">
+                                            <span class="tag"><i class="lni lni-map-marker"></i>{{ property.quarter }}, Niamey</span>
+                                        </p>
+                                        <ul class="info">
+                                            <li class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-random" role="tabpanel" aria-labelledby="nav-random-tab">
+                        <div class="row">
+                            {% for property in properties %}
+
+                            <div class="col-lg-3 col-md-4 col-12">
+
+                                <div class="single-item-grid">
+                                    <div class="image">
+                                        <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}"><img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb') }}" alt="#"></a>
+                                        <i class=" cross-badge lni lni-bolt"></i>
+                                        <span class="flat-badge sale">{{ property.type }}</span>
+                                    </div>
+                                    <div class="content">
+                                        {% for category in property.categories %}
+                                        <span class="tag">{{ category.name }}</span>
+                                        {% endfor %}
+                                        <h3 class="title">
+                                            <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
+                                        </h3>
+                                        <p class="location">
+                                            <span class="tag"><i class="lni lni-map-marker"></i>{{ property.quarter }}, Niamey</span>
+                                        </p>
+                                        <ul class="info">
+                                            <li class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

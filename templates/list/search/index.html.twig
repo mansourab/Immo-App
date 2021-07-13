@@ -1,0 +1,32 @@
+<div class="category-sidebar">
+    {{ form_start(form) }}
+
+        <div class="single-widget search">
+            <h3>Rechercher</h3>
+            {{ form_row(form.q, {attr: {'class': 'form-style'}}) }}
+    {#        <button type="submit"><i class="lni lni-search-alt"></i></button>#}
+        </div>
+
+        <div class="single-widget">
+            <h3>Filtrer</h3>
+            <span class="mb-2">Par Quartier</span>
+            <div class="select">
+                {{ form_row(form.quarter, {attr: {'class': 'form-style'}} )}}
+            </div>
+
+            <span class="mt-4 mb-2">Par Type de Bien</span>
+            <div class="select">
+                {{ form_row(form.type, {attr: {'class': 'form-style'}} )}}
+            </div>
+
+            <span class="mt-4 mb-2">Par Catégorie</span>
+            {{ form_row(form.categories) }}
+
+            <div class="button mt-4">
+                <button class="btn">Rechercher</button>
+            </div>
+
+        </div>
+
+    {{ form_end(form) }}
+</div>

@@ -14,13 +14,13 @@ class CategoryController extends AbstractController
 {
 
     /**
-     * @Route("admin/category/index", name="app_category_list")
+     * @Route("admin/category/index", name="app_category_index")
      */
     public function list_category(CategoryRepository $categoryRepository)
     {
         $categories = $categoryRepository->findAll();
 
-        return $this->render('backend/admin/category/index.html.twig', compact('categories'));
+        return $this->render('admin/category/list/index.html.twig', compact('categories'));
     }
 
     /**
@@ -30,25 +30,25 @@ class CategoryController extends AbstractController
     {
         $category = new Category;
 
-        $category_create_form = $this->createForm(CategoryFormType::class, $category);
-        $category_create_form->handleRequest($request);
+        $form = $this->createForm(CategoryFormType::class, $category);
+        $form->handleRequest($request);
 
-        if ($category_create_form->isSubmitted() && $category_create_form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($category);
             $manager->flush();
 
             $this->addFlash('success', 'The category is added successfully');
 
-            return $this->redirectToRoute('app_category_list');
+            return $this->redirectToRoute('app_category_index');
         }
 
-        return $this->render('backend/admin/category/create.html.twig', [
-            'category_create_form' => $category_create_form->createView()
+        return $this->render('admin/category/create/index.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("admin/category/edit/{id}", name="app_category_edit")
+     * @Route("category/edit/{id}", name="app_category_edit")
      */
     public function edit_category(Request $request, EntityManagerInterface $manager, Category $category)
     {
@@ -60,10 +60,10 @@ class CategoryController extends AbstractController
 
             $this->addFlash('success', 'The category is updated successfully');
 
-            return $this->redirectToRoute('app_category_list');
+            return $this->redirectToRoute('app_category_index');
         }
 
-        return $this->render('backend/admin/category/edit.html.twig', [
+        return $this->render('admin/category/edit/index.html.twig', [
             'form' => $form->createView()
         ]);
     }

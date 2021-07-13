@@ -1,0 +1,138 @@
+<section class="item-details section">
+    <div class="container">
+        <div class="top-area">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="product-images">
+                        <main id="gallery">
+                            <div class="main-img">
+                                <img src="{{ vich_uploader_asset(property) | imagine_filter('detail_thumb')}}" id="current" alt="#">
+                            </div>
+{#                            <div class="images">#}
+{#                                <img src="{{ asset('build/images/item-details/image1.jpg') }}" class="img" alt="#">#}
+{#                                <img src="{{ asset('build/images/item-details/image2.jpg') }}" class="img" alt="#">#}
+{#                                <img src="{{ asset('build/images/item-details/image3.jpg') }}" class="img" alt="#">#}
+{#                                <img src="{{ asset('build/images/item-details/image4.jpg') }}" class="img" alt="#">#}
+{#                                <img src="{{ asset('build/images/item-details/image5.jpg') }}" class="img" alt="#">#}
+{#                            </div>#}
+                        </main>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="product-info">
+                        <h2 class="title">{{ property.title }}</h2>
+                        <p class="location"><i class="lni lni-map-marker"></i>{{ property.quarter }}, Niamey</p>
+                        <h3 class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</h3>
+                        <div class="list-info">
+                            <h4>Informations</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li>
+                                            <span>Catégorie:</span>
+                                            {% for category in property.categories %}
+                                                {{ category.name }}
+                                            {% endfor %}
+                                        </li>
+                                        <li><span>Type:</span> {{ property.type }}</li>
+                                        <li>
+                                            <span> {% if property.room > 1 %}
+                                                    Chambres:
+                                                    {% else %}
+                                                    Chambre:
+                                                    {% endif %}
+                                            </span> {{ property.room }}
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li>
+                                            <span>Propriétaire:</span>
+                                            {{ property.owner }}
+                                        </li>
+                                        <li><span>Surface:</span> {{ property.area }} m²</li>
+                                        <li><span>Galérie:</span>
+                                            {{ property.images | length }} {% if property.images | length > 1 %}
+                                                images
+                                                {% else %}
+                                                image
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="contact-info">
+                            <ul>
+                                <li>
+                                    <a href="tel:+002562352589" class="call">
+                                        <i class="lni lni-phone-set"></i>
+                                        +227 89 375 348
+                                        <span>Appeler pour réserver</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="mail">
+                                        <i class="lni lni-envelope"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="mail">
+                                        <i class="lni lni-facebook-messenger"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item-details-blocks">
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-12">
+
+                    <div class="single-block description">
+                        <h3>Description</h3>
+                        <p>
+                            {{ property.content | raw }}
+                        </p>
+
+                    </div>
+
+                    <div class="single-block comments" data-animated-id="3">
+                        <h3>Galérie</h3>
+
+                        <div class="row d-flex" id="lightgallery">
+                            {% for image in property.images %}
+                            <a href="{{ asset('uploads/galerie/'~image.url) }}" data-exthumbimage="{{ asset('uploads/galerie/'~image.url) }}" data-src="{{ asset('uploads/galerie/'~image.url) }}" class="col-sm-4 mb-2">
+                                <img src="{{ asset('uploads/galerie/'~image.url) }}" alt="" width="262px;" height="174px;">
+                            </a>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5 col-12">
+                    <div class="item-details-sidebar">
+
+                        <div class="single-block author">
+                            <h3>Author</h3>
+                            <div class="content">
+                                <img src="assets/images/testimonial/testi3.jpg" alt="#">
+                                <h4>Miliya Jessy</h4>
+                                <span>Member Since May 15,2023</span>
+                                <a href="javascript:void(0)" class="see-all">See All Ads</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

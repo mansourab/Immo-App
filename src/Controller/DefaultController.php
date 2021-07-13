@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
+use App\Entity\Contact;
 use App\Entity\Property;
 use App\Form\SearchForm;
+use App\Repository\ContactRepository;
 use App\Repository\PropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +17,7 @@ class DefaultController extends AbstractController
 {
 
     /**
-     * @Route("/", name="app_home_index")
+     * @Route("/", name="app_home")
      */
     public function index(PropertyRepository $repo) : Response
     {
@@ -25,7 +27,7 @@ class DefaultController extends AbstractController
 
         $properties = $repo->findAll();
 
-        return $this->render('frontend/home/index.html.twig', [
+        return $this->render('home/index.html.twig', [
             'latest_properties' => $latestProperties,
             'properties' => $properties,
             'latest_rent' => $latestForRent,
@@ -33,20 +35,20 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/annonce/detail/{id}", name="app_annonce_detail")
+     * @Route("/annonce/detail/{slug}", name="app_annonce_detail")
      */
     public function detail(Property $property)
     {
-        return $this->render('frontend/detail/show.html.twig', [
+        return $this->render('detail/index.html.twig', [
             'property' => $property
         ]);
     }
 
     /**
-     * @Route("/annonces", name="app_annonce_all")
+     * @Route("/annonces-immobilieres", name="app_annonces")
      * @return Response
      */
-    public function properties(PropertyRepository $repo, Request $request): Response
+    public function list(PropertyRepository $repo, Request $request): Response
     {
         $data = new SearchData;
 
@@ -58,10 +60,41 @@ class DefaultController extends AbstractController
         $properties = $repo->findSearch($data);
 
 
-        return $this->render('frontend/properties/index.html.twig', [
+        return $this->render('list/index.html.twig', [
             'properties' => $properties,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/a-propos", name="app_about")
+     * @return [type] [description]
+     */
+    public function about()
+    {
+        return $this->render('about/index.html.twig');
+    }
+
+    /**
+     * @Route("/contact", name="app_contact")
+     * @return [type] [description]
+     */
+    public function contact(ContactRepository $repository)
+    {
+        $contacts = $repository->activate();
+
+        return $this->render('contact/index.html.twig', [
+            'contacts' => $contacts
+        ]);
+    }
+
+    /**
+     * @Route("/coming-soon", name="app_coming_soon")
+     * @return Response
+     */
+    public function coming()
+    {
+        return $this->render('soon/index.html.twig');
     }
 
 }

@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Type;
 use App\Form\TypeFormType;
 use App\Repository\TypeRepository;
-use Doctrine\DBAL\Types\TypeRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,13 +16,13 @@ class TypeController extends AbstractController
 {
 
     /**
-     * @Route("/admin/type/index", name="app_type_list")
+     * @Route("/admin/type/index", name="app_type_index")
      */
     public function index(TypeRepository $repository)
     {
         $types = $repository->findAll();
 
-        return $this->render('backend/admin/type/index.html.twig', [
+        return $this->render('admin/type/list/index.html.twig', [
             'types' => $types,
         ]);
     }
@@ -43,10 +42,10 @@ class TypeController extends AbstractController
 
             $em->flush();
 
-            return $this->redirectToRoute('app_type_list');
+            return $this->redirectToRoute('app_type_index');
         }
 
-        return $this->render('backend/admin/type/new.html.twig', [
+        return $this->render('admin/type/create/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -64,10 +63,10 @@ class TypeController extends AbstractController
 
             $em->flush();
 
-            return $this->redirectToRoute('app_type_list');
+            return $this->redirectToRoute('app_type_index');
         }
 
-        return $this->render('backend/admin/type/edit.html.twig', [
+        return $this->render('admin/type/edit/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }

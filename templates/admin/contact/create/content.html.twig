@@ -1,0 +1,76 @@
+<section class="dashboard section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+
+                {% include 'admin/partials/menu.html.twig' %}
+
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="main-content">
+
+                    <div class="dashboard-block mt-0">
+                        <h3 class="block-title">Create contact infos</h3>
+                        <div class="inner-block">
+                            <div class="container">
+                            {{ form_start(form) }}
+                            <div class="row">
+                                <div class="col-md-12 mb-2">
+                                    {{ form_row(form.title) }}
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    {{ form_row(form.description) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    {{ form_row(form.phone1) }}
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    {{ form_row(form.phone2) }}
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    {{ form_row(form.phone3) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    {{ form_row(form.email) }}
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    {{ form_row(form.address) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    {{ form_row(form.facebook) }}
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    {{ form_row(form.twitter) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    {{ form_row(form.linkedIn) }}
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    {{ form_row(form.whatsapp) }}
+                                </div>
+                            </div>
+                            <div>
+                                {{ form_row(form.activated) }}
+                            </div>
+                            <button class="btn btn-primary mt-2">Créer</button>
+                            {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

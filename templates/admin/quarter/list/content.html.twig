@@ -1,0 +1,66 @@
+<section class="dashboard section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+
+                {% include 'admin/partials/menu.html.twig' %}
+
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="main-content">
+
+                    <div class="dashboard-block mt-0">
+                        <h3 class="block-title">Liste des quartiers</h3>
+
+                        <nav class="list-nav">
+                            <ul>
+                                <li class="active"><a href="#">Les quartiers disponibles <span>{{ quarters | length }}</span></a></li>
+                                <li class="align-right">
+                                    <a href="{{ path('app_quarter_new') }}" class="btn">Ajouter un nouveau quartier</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div class="my-items">
+
+                            <div class="item-list-title">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-3 col-md-2 col-12">
+                                        <p>Id</p>
+                                    </div>
+                                    <div class="col-lg-4 col-md-5 col-12">
+                                        <p>name</p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-12 align-right">
+                                        <p>Actions</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="single-item-list">
+                                {% for quarter in quarters %}
+
+                                <div class="row align-items-center bg-light mb-4">
+                                    <div class="col-lg-3 col-md-2 col-12">
+                                        <p>{{ quarter.id }}</p>
+                                    </div>
+                                    <div class="col-lg-4 col-md-5 col-12">
+                                        <p>{{ quarter.name }}</p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-12 align-right">
+                                        <ul class="action-btn">
+                                            <li><a href="{{ path('app_quarter_edit', {id: quarter.id}) }}"><i class="lni lni-pencil"></i></a></li>
+                                            <li><a href="#"><i class="lni lni-trash-can"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

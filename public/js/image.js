@@ -1,34 +1,29 @@
-// Effacer les images de la galerie en ajax
 window.onload = () => {
+    // Gestion des buttons supprimer
     let links = document.querySelectorAll("[data-delete]");
 
     for (link of links) {
         link.addEventListener("click", function(e) {
             e.preventDefault();
 
-            if (confirm("Etes vous sure ?")) {
-                
-                fetch(this.getAttribute('href'), {
+            if(confirm("Voulez-vous supprimer cette image ?")) {
+                fetch(this.getAttribute("href"), {
                     method: "DELETE",
                     headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'Content-Type': 'application/json'
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({'_token': this.dataset.token})
-
+                    body: JSON.stringify({"_token": this.dataset.token})
                 }).then(
                     response => response.json()
-
                 ).then(data => {
-                    if (data.success) {
+                    if(data.success)
                         this.parentElement.remove()
-                    } else {
+                    else
                         alert(data.error)
-                    }
-
                 }).catch(e => alert(e))
-                    
             }
-        });
+        })
     }
 }
+

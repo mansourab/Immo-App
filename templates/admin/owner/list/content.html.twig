@@ -1,0 +1,85 @@
+<section class="dashboard section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+
+                {% include 'admin/partials/menu.html.twig' %}
+
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="main-content">
+
+                    <div class="dashboard-block mt-0">
+                        <h3 class="block-title">Liste des propriétaires</h3>
+
+                        <nav class="list-nav">
+                            <ul>
+                                <li class="active"><a href="#">Les propriétaires disponible <span>{{ owners | length }}</span></a></li>
+                                <li class="align-right">
+                                    <a href="{{ path('app_owner_new') }}" class="btn">Ajouter un nouveau propriétaire</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div class="my-items">
+
+                            <div class="item-list-title">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-1 col-md-1 col-12">
+                                        <p>Id</p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-12">
+                                        <p>Nom et Prénom</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-12">
+                                        <p>email</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-12">
+                                        <p>Téléphone</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-12">
+                                        <p>Adresse</p>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-12 align-right">
+                                        <p>Actions</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="single-item-list">
+                                {% for owner in owners %}
+
+                                <div class="row align-items-center mb-4 bg-light">
+                                    <div class="col-lg-1 col-md-1 col-12">
+                                        <p>{{ owner.id }}</p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-12">
+                                        <p>{{ owner.name }}</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-12">
+                                        <p>{{ owner.email }}</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-12">
+                                        <p>{{ owner.phone }}</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-12">
+                                        <p>{{ owner.address }}</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-12 align-right">
+                                        <ul class="action-btn">
+                                            <li><a href="{{ path('app_owner_edit', {id: owner.id}) }}"><i class="lni lni-pencil"></i></a></li>
+                                            <li><a href="javascript:avoid(0)"><i class="lni lni-trash-can"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

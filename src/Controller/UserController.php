@@ -14,18 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("admin/user", name="user_index", methods={"GET"})
+     * @Route("user/index", name="app_user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('backend/admin/user/index.html.twig', [
+        return $this->render('admin/account/profil/list/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
     }
 
 
     /**
-     * @Route("admin/user/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route("user/edit/{id}", name="app_user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user): Response
     {
@@ -35,17 +35,17 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_index');
+            return $this->redirectToRoute('app_user_index');
         }
 
-        return $this->render('backend/admin/user/edit.html.twig', [
+        return $this->render('admin/account/profil/edit/index.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("admin/user/{id}", name="user_delete", methods={"POST"})
+     * @Route("user/{id}", name="app_user_delete", methods={"POST"})
      */
     public function delete(Request $request, User $user): Response
     {
@@ -55,6 +55,6 @@ class UserController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('app_user_index');
     }
 }

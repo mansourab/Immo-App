@@ -14,17 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class OwnerController extends AbstractController
 {
     /**
-     * @Route("admin/owner/list", name="app_owner_index", methods={"GET"})
+     * @Route("owner/index", name="app_owner_index", methods={"GET"})
      */
     public function index(OwnerRepository $ownerRepository): Response
     {
-        return $this->render('backend/admin/owner/index.html.twig', [
+        return $this->render('admin/owner/list/index.html.twig', [
             'owners' => $ownerRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("admin/owner/new", name="app_owner_new", methods={"GET","POST"})
+     * @Route("owner/new", name="app_owner_new", methods={"GET", "POST"})
      */
     public function new_owner(Request $request): Response
     {
@@ -41,7 +41,7 @@ class OwnerController extends AbstractController
             return $this->redirectToRoute('app_owner_index');
         }
 
-        return $this->render('backend/admin/owner/new.html.twig', [
+        return $this->render('admin/owner/create/index.html.twig', [
             'owner' => $owner,
             'form' => $form->createView(),
         ]);
@@ -49,7 +49,7 @@ class OwnerController extends AbstractController
 
 
     /**
-     * @Route("admin/owner/{id}/edit", name="app_owner_edit", methods={"GET","POST"})
+     * @Route("owner/{id}/edit", name="app_owner_edit", methods={"GET","POST"})
      */
     public function edit_owner(Request $request, Owner $owner): Response
     {
@@ -62,7 +62,7 @@ class OwnerController extends AbstractController
             return $this->redirectToRoute('app_owner_index');
         }
 
-        return $this->render('backend/admin/owner/edit.html.twig', [
+        return $this->render('admin/owner/edit/index.html.twig', [
             'owner' => $owner,
             'form' => $form->createView(),
         ]);

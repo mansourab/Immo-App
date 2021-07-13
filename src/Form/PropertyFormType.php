@@ -7,8 +7,10 @@ use App\Entity\Owner;
 use App\Entity\Property;
 use App\Entity\Quarter;
 use App\Entity\Type;
+use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -42,7 +44,7 @@ class PropertyFormType extends AbstractType
                 'required' => false,
                 'label' => 'Choose Categories',
                 'class' => Category::class,
-                // 'expanded' => true,
+//                'expanded' => true,
                 'multiple' => true,
             ])
             ->add('quarter', EntityType::class, [
@@ -83,6 +85,7 @@ class PropertyFormType extends AbstractType
                 'required' => false,
                 'label' => 'Property Status'
             ])
+//            ->add('published', CheckboxType::class)
         ;
     }
 

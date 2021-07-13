@@ -1,0 +1,58 @@
+<section class="items-grid section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Nos Meilleures annonces</h2>
+                    {# <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem
+                        Ipsum available, but the majority have suffered alteration in some form.</p> #}
+                </div>
+            </div>
+        </div>
+        <div class="single-head">
+            <div class="row">
+                {% for property in properties %}
+                    
+                <div class="col-lg-4 col-md-6 col-12">
+
+                    <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                        <div class="image">
+                            <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}" class="thumbnail">
+                                <img src="{{ vich_uploader_asset(property) | imagine_filter('home_feature') }}" alt="#">
+                            </a>
+                            <div class="author">
+                                <div class="author-image">
+                                    <a href="javascript:void(0)">
+                                        <img src="{{ asset('build/images/items-grid/author-1.jpg') }}" alt="#">
+                                        <span>Smith jeko</span>
+                                    </a>
+                                </div>
+                                <p class="sale">{{ property.type }}</p>
+                            </div>
+                            <p class="item-position"><i class="lni lni-bolt"></i> Mis en avant</p>
+                        </div>
+                        <div class="content">
+                            <div class="top-content">
+                                {% for category in property.categories %}
+                                    <a href="javascript:void(0)" class="tag">{{ category.name }}</a>
+                                {% endfor %}
+                                <h3 class="title">
+                                    <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
+                                </h3>
+
+                                <ul class="info-list">
+                                    <li><a href="#"><i class="lni lni-map-marker"></i> {{ property.quarter }}, Niamey</a></li>
+                                    <li><a href="#"><i class="lni lni-timer"></i> {{ property.createdAt | date() }}</a></li>
+                                </ul>
+                            </div>
+                            <div class="bottom-content">
+                                <p class="price pb-4">Prix : <span>{{ property.price | number_format(0, ',', '.') }} Fcfa</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

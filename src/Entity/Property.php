@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
@@ -97,6 +98,7 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
 
@@ -311,12 +313,12 @@ class Property
         return $this;
     }
 
-    public function getPublished(): ?bool
+    public function getPublished()
     {
         return $this->published;
     }
 
-    public function setPublished(bool $published): self
+    public function setPublished(bool $published)
     {
         $this->published = $published;
 
