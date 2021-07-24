@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\PropertyRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +19,8 @@ class AdminController extends AbstractController
      */
     public function index(PropertyRepository $repo, PaginatorInterface $paginator, Request $request)
     {
+        $user = new User();
+
         $properties = $paginator->paginate(
             $repo->findAll(),
             $request->query->getInt('page', 1),
@@ -25,7 +28,8 @@ class AdminController extends AbstractController
         );
 
         return $this->render('admin/index.html.twig', [
-            'properties' => $properties
+            'properties' => $properties,
+            'user' => $user
         ]);
     }
 }

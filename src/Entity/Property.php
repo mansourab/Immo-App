@@ -112,6 +112,11 @@ class Property
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $featured;
+
     
     public function __construct()
     {
@@ -365,5 +370,17 @@ class Property
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getFeatured(): ?bool
+    {
+        return $this->featured;
+    }
+
+    public function setFeatured(bool $featured): self
+    {
+        $this->featured = $featured;
+
+        return $this;
     }
 }

@@ -9,9 +9,18 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Flasher\Toastr\Prime\ToastrFactory;
 
 class CategoryController extends AbstractController
 {
+
+    private $flasher;
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
+
 
     /**
      * @Route("admin/category/index", name="app_category_index")
@@ -66,6 +75,25 @@ class CategoryController extends AbstractController
         return $this->render('admin/category/edit/index.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/category/{id}", name="app_category_delete", methods={"POST"})
+     */
+    public function delete_category(Request $request, Category $category)
+    {
+        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($category);
+            $entityManager->flush();
+
+            $this->flasher->addSuccess('Catégorie supprimé avec succès.');
+
+            return $this->redirectToRoute('app_category_index');
+        }
+
+        $this->flasher->error('Oops! une erreur s\'est produite.');
+        
     }
     
 }

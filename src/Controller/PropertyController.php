@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Flasher\Toastr\Prime\ToastrFactory;
 
 
 class PropertyController extends AbstractController
@@ -35,12 +36,15 @@ class PropertyController extends AbstractController
      */
     private $manager;
 
+    private $flasher;
 
-    public function __construct(PropertyRepository $propertyRepository, PaginatorInterface $paginator, EntityManagerInterface $manager)
+
+    public function __construct(PropertyRepository $propertyRepository, PaginatorInterface $paginator, EntityManagerInterface $manager, ToastrFactory $flasher)
     {
         $this->repo = $propertyRepository;
         $this->paginator = $paginator;
         $this->manager = $manager;
+        $this->flasher = $flasher;
     }
 
     /**
@@ -77,7 +81,8 @@ class PropertyController extends AbstractController
             $this->manager->persist($property);
             $this->manager->flush();
 
-            $this->addFlash('success', 'Your property is added successfully');
+            // $this->addFlash('success', 'Your property is added successfully');
+            $this->flasher->addSuccess('Annonce ajouté avec succès');
 
             return $this->redirectToRoute('app_admin_index');
         }
@@ -120,7 +125,9 @@ class PropertyController extends AbstractController
 
             $this->manager->flush();
 
-            $this->addFlash('success', 'Your property is updated successfully');
+            // $this->addFlash('success', 'Your property is updated successfully');
+            $this->flasher->addSuccess('Annonce édité avec succès');
+
             return $this->redirectToRoute('app_admin_index');
         }
 
@@ -152,9 +159,11 @@ class PropertyController extends AbstractController
 
             // On repond en JSON
             return new JsonResponse(['success' => 1]); 
+            // $this->flasher->addSuccess('Image supprimée.');
 
         } else {
             return new JsonResponse(['error' => 'Token invalid'], 400);
+            // $this->flasher->error('Attention! Le token est invalid');
         }
     }
 
@@ -201,9 +210,14 @@ class PropertyController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($property);
             $entityManager->flush();
+
+            $this->flasher->addSuccess('Annonce supprimé avec succès.');
+
+            return $this->redirectToRoute('app_admin_index');
         }
 
-        return $this->redirectToRoute('app_property_list');
+        $this->flasher->error('Oops! une erreur s\'est produite.');
+        
     }
 
 }

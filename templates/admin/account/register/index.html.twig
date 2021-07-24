@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title 'Créer un nouvel Utilisateur' %}
+
 {% block body %}
 
 <div class="breadcrumbs">
@@ -26,54 +28,56 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
                 <div class="form-head">
-                    <h4 class="title">S'inscrire</h4>
-                    <form action="#!" method="post">
-{#                        <div class="socila-login">#}
-{#                            <ul>#}
-{#                                <li><a href="javascript:void(0)" class="facebook"><i class="lni lni-facebook-original"></i>Import#}
-{#                                        From Facebook</a></li>#}
-{#                                <li><a href="javascript:void(0)" class="google"><i class="lni lni-google"></i>Import From Google#}
-{#                                        Plus</a>#}
-{#                                </li>#}
-{#                            </ul>#}
-{#                        </div>#}
-{#                        <div class="alt-option">#}
-{#                            <span>Or</span>#}
-{#                        </div>#}
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input name="password" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input name="email" type="email">
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input name="password" type="password">
-                        </div>
-                        <div class="form-group">
-                            <label>Confirm Password</label>
-                            <input name="password" type="password">
-                        </div>
-                        <div class="check-and-pass">
-                            <div class="row align-items-center">
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input width-auto" id="exampleCheck1">
-                                        <label class="form-check-label">Agree to our <a href="javascript:void(0)">Terms and
-                                                Conditions</a></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="button">
-                            <button type="submit" class="btn">Enregistrer</button>
-                        </div>
-                        <p class="outer-link">Avez vous déja un compte? <a href="login.html"> Se Connecter Maintenant</a>
-                        </p>
-                    </form>
+                    <h4 class="title">Créer un compte</h4>
+                    {{ form_start(form) }}
+                    {{ form_row(form.firstname, {attr: {'class': 'form-style'}}) }}
+                    {{ form_row(form.lastname, {attr: {'class': 'form-style'}}) }}
+                    {{ form_row(form.email, {attr: {'class': 'form-style'}}) }}
+                    {{ form_row(form.plainPassword, {attr: {'class': 'form-style'}}) }}
+                    {{ form_row(form.avatarFile, {attr: {'class': 'form-style'}}) }}
+{#                    {{ form_row(form.agreeTerms) }}#}
+                    <div class="button mt-4">
+                        <button class="btn">Créer mon compte</button>
+                    </div>
+                    {{ form_end(form) }}
                 </div>
+
+{#                    <form action="#" method="post">#}
+
+{#                        <div class="form-group">#}
+{#                            <label>Name</label>#}
+{#                            <input name="password" type="text">#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label>Email</label>#}
+{#                            <input name="email" type="email">#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label>Password</label>#}
+{#                            <input name="password" type="password">#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label>Confirm Password</label>#}
+{#                            <input name="password" type="password">#}
+{#                        </div>#}
+{#                        <div class="check-and-pass">#}
+{#                            <div class="row align-items-center">#}
+{#                                <div class="col-12">#}
+{#                                    <div class="form-check">#}
+{#                                        <input type="checkbox" class="form-check-input width-auto" id="exampleCheck1">#}
+{#                                        <label class="form-check-label">Agree to our <a href="javascript:void(0)">Terms and#}
+{#                                                Conditions</a></label>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="button">#}
+{#                            <button type="submit" class="btn">Enregistrer</button>#}
+{#                        </div>#}
+{#                        <p class="outer-link">Avez vous déja un compte? <a href="login.html"> Se Connecter Maintenant</a>#}
+{#                        </p>#}
+{#                    </form>#}
+
             </div>
         </div>
     </div>

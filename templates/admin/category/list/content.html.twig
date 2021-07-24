@@ -49,8 +49,18 @@
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-12 align-right">
                                         <ul class="action-btn">
-                                            <li><a href="{{ path('app_category_edit', {id: category.id}) }}"><i class="lni lni-pencil"></i></a></li>
-                                            <li><a href="#"><i class="lni lni-trash-can"></i></a></li>
+                                            <li>
+                                                <a href="{{ path('app_category_edit', {id: category.id}) }}">
+                                                    <i class="lni lni-pencil"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form method="post" action="{{ path('app_category_delete', {'id': category.id}) }}" onsubmit="return confirm('Etes vous sure de vouloir effacer cette categorie ?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+                                                    <button class="btn"><i class="lni lni-trash"></i></button>
+                                                </form>
+                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>

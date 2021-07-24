@@ -6,3 +6,15 @@
     {% include 'admin/property/create/content.html.twig' %}
 {% endblock %}
 
+{% block stylesheets %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js">
+
+    <script>
+        $(select).select2();
+    </script>
+{% endblock %}
+

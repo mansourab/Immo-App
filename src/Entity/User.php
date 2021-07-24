@@ -7,13 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @Vich\Uploadable
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -57,6 +60,12 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Property::class, mappedBy="user")
      */
     private $properties;
+
+    /**
+     * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="avatar")
+     * @var File|null
+     */
+    private $avatarFile;
 
     public function __construct()
     {
@@ -208,5 +217,37 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    public function setAvatarFile(?File $avatarFile = null)
+    {
+        $this->avatarFile = $avatarFile;
+
+        return $this;
+    }
+
+    public function serialize() {
+
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+        ));
+    }
+
+    public function unserialize($serialized) {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+        ) = unserialize($serialized);
     }
 }

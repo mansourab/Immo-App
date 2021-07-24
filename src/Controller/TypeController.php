@@ -10,10 +10,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Flasher\Toastr\Prime\ToastrFactory;
 
 
 class TypeController extends AbstractController
 {
+
+    private $flasher;
+
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
+
 
     /**
      * @Route("/admin/type/index", name="app_type_index")
@@ -69,5 +79,24 @@ class TypeController extends AbstractController
         return $this->render('admin/type/edit/index.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/admin/type/{id}", name="app_type_delete", methods={"POST"})
+     */
+    public function delete_category(Request $request, Type $type)
+    {
+        if ($this->isCsrfTokenValid('delete'.$type->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($type);
+            $entityManager->flush();
+
+            $this->flasher->addSuccess('Type de bien supprimé avec succès.');
+
+            return $this->redirectToRoute('app_type_index');
+        }
+
+        $this->flasher->error('Oops! une erreur s\'est produite.');
+        
     }
 }

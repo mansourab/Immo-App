@@ -1,57 +1,53 @@
 <div class="dashboard-sidebar">
     <div class="user-image">
-        <img src="{{ asset('build/images/dashboard/user-image.jpg') }}" alt="#">
-        <h3>Steve Aldridge
-            <span><a href="javascript:void(0)">@username</a></span>
-        </h3>
+        {% if app.user %}
+            <img src="{{ vich_uploader_asset(app.user) | imagine_filter('admin_user_avatar') }}" alt="#">
+            <h3>Steve Aldridge
+                <span><a href="javascript:void(0)">@username</a></span>
+            </h3>
+        {% endif %}
+
+
     </div>
     <div class="dashboard-menu">
         <ul>
             <li>
-                <a href="{{ path('app_admin_index') }}">
+                <a {% if route_name == "app_admin_index" %} class="active" {% endif %} 
+                    href="{{ path('app_admin_index') }}"
+                >
                     <i class="lni lni-dashboard"></i> Dashboard
                 </a>
             </li>
             <li>
-                <a href="{{ path('app_property_new') }}">
+                <a {% if route_name == "app_property_new" %} class="active" {% endif %} href="{{ path('app_property_new') }}">
                     <i class="lni lni-circle-plus"></i> Ajouter une annonce
                 </a>
             </li>
             <li>
-                <a href="{{ path('app_category_index') }}">
+                <a {% if route_name == "app_category_index" %} class="active" {% endif %} href="{{ path('app_category_index') }}">
                     <i class="lni lni-apartment"></i> Catégories
                 </a>
             </li>
             <li>
-                <a href="{{ path('app_type_index') }}">
+                <a {% if route_name == "app_type_index" %} class="active" {% endif %} href="{{ path('app_type_index') }}">
                     <i class="lni lni-bolt-alt"></i> Types de bien
                 </a>
             </li>
             <li>
-                <a href="{{ path('app_owner_index') }}">
+                <a {% if route_name == "app_owner_index" %} class="active" {% endif %} href="{{ path('app_owner_index') }}">
                     <i class="lni lni-database"></i> Propriétaires
                 </a>
             </li>
             <li>
-                <a class="active" href="{{ path('app_quarter_index') }}">
+                <a {% if route_name == "app_quarter_index" %} class="active" {% endif %} href="{{ path('app_quarter_index') }}">
                     <i class="lni lni-map-marker"></i> Les quartiers
                 </a>
             </li>
             <li>
-                <a href="{{ path('app_user_index') }}">
+                <a {% if route_name == "app_user_index" %} class="active" {% endif %} href="{{ path('app_user_index') }}">
                     <i class="lni lni-user"></i> Les Utilisateurs
                 </a>
             </li>
-            <li>
-                <a href="{{ path('app_contact_index') }}">
-                    <i class="lni lni-phone"></i> Contact Page
-                </a>
-            </li>
-{#            <li>#}
-{#                <a href="#">#}
-{#                    <i class="lni lni-pencil-alt"></i> Close account#}
-{#                </a>#}
-{#            </li>#}
         </ul>
         <div class="button">
             <a class="btn" href="#">Logout</a>

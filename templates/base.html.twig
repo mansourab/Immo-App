@@ -1,3 +1,4 @@
+{% set route_name = app.request.attributes.get('_route') %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,20 +16,35 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/tiny-slider.css') }}">
 	<link href="{{ asset('js/lightgallery/css/lightgallery.min.css') }}" rel="stylesheet">
 
-{#	<link href="{{ asset('js/select2/css/select2.min.css') }}" rel="stylesheet">#}
-	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
 	<link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
-{#	<link rel="stylesheet" href="{{ asset('css/docs.css') }}">#}
 
+	{# <link rel="stylesheet" href="{{ asset('js/select2/js/css/select2.css') }}"> #}
 
 	{# Fonts #}
 	<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&amp;display=swap" rel="stylesheet">
 
+	{# <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"> #}
+	{# <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"> #}
+
+
 	<style>
+
+		/* .active-menu {
+			color: #5830e0;
+			border-bottom: 1px solid #5830e0;
+		} */
+
+		.form-style {
+			height: 50px;
+			width: 100%;
+			border: 1px solid #eee;
+			color: #081828;
+			background: #fff;
+			padding: 0 20px;
+		}
+
 		.page-item.active .page-link {
 			color: #fff;
 			background-color: #5830e0;
@@ -69,7 +85,11 @@
     {% endblock %}
 </head>
 <body>
+	{{ flasher_render() }}
+	
 	{% include 'layouts/header.html.twig' %}
+
+	{% include 'layouts/flash.html.twig' %}
 
 	{% block body %}
 	{% endblock %}
@@ -84,8 +104,11 @@
 
 	<script src="{{ asset('js/lightgallery/js/lightgallery-all.min.js') }}"></script>
 	<script src="{{ asset('js/image.js') }}"></script>
-	<script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
-{#	<script src="{{ asset('js/select2/js/select2-full.min.js') }}"></script>#}
+
+	<script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+
+	<script src="{{ asset('js/index.js') }}"></script>
+
 
 
 	<script>
@@ -103,7 +126,8 @@
 		});
 
 		// $(".multi-select").select2();
-		$('.select').select2();
+		// $('.select').select2();
+
 	</script>
 
 

@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -81,10 +82,16 @@ class PropertyFormType extends AbstractType
                 'label' => 'Property Type',
                 'class' => Type::class
             ])
-            ->add('status', TextType::class, [
-                'required' => false,
-                'label' => 'Property Status'
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'Actif' => 'Actif',
+                    'Inactif' => 'Inactif'
+                ]
             ])
+            // ->add('status', TextType::class, [
+            //     'required' => false,
+            //     'label' => 'Property Status'
+            // ])
 //            ->add('published', CheckboxType::class)
         ;
     }

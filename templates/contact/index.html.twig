@@ -12,7 +12,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-12">
                 <ul class="breadcrumb-nav">
-                    <li><a href="index-2.html">Home</a></li>
+                    <li><a href="{{ path('app_home') }}">Home</a></li>
                     <li>Contact</li>
                 </ul>
             </div>
@@ -27,14 +27,11 @@
             <div class="row">
                 <div class="col-lg-5 col-12">
                     <div class="single-head">
-                        {% for contact in contacts %}
                         <div class="contant-inner-title">
 
                             <h2 class="mb-4">Coordonnées & Localisation</h2>
-{#                            <p>Pour le moment nous avons pas de lacal fixe mais vous pouvez nous joindre à n'importe quelle heure. voir nos contacts en dessous.</p>#}
-                            <p>
-                                {{ contact.description }}
-                            </p>
+                            <p>Pour le moment nous avons pas de lacal fixe mais vous pouvez nous joindre à n'importe quelle heure. voir nos contacts en dessous.</p>
+
                         </div>
                         <div class="single-info">
                             <h3>Heures de disponibilité</h3>
@@ -47,32 +44,31 @@
                             <h3>Contact infos</h3>
                             <ul>
                                 <li>
-                                    <span class="fw-bold">Adresse : </span> {{ contact.address }}
+                                    <span class="fw-bold">Adresse : </span> Niamey / Niger
                                 </li>
 
                                 <li>
-                                    <span class="fw-bold">Email : </span> {{ contact.email }}
+                                    <span class="fw-bold">Email : </span> haya@gmail.com
                                 </li>
 
                                 <li>
-                                    <span class="fw-bold">Téléphone : </span> {{ contact.phone1 }} / {{ contact.phone2 }} / {{ contact.phone3 }}
+                                    <span class="fw-bold">Téléphone : </span> ( +227 ) 89375348 / 84808205 / 86548520
                                 </li>
                             </ul>
                         </div>
                         <div class="single-info contact-social">
                             <h3>Réseaux sociaux</h3>
                             <ul>
-                                <li><a href="{{ contact.facebook }}"><i class="lni lni-facebook-original"></i></a></li>
-                                <li><a href="{{ contact.twitter }}"><i class="lni lni-twitter-original"></i></a></li>
-                                <li><a href="{{ contact.linkedIn }}"><i class="lni lni-linkedin-original"></i></a></li>
-                                <li><a href="{{ contact.whatsapp }}"><i class="lni lni-whatsapp"></i></a></li>
+                                <li><a href="#"><i class="lni lni-facebook-original"></i></a></li>
+                                <li><a href="#"><i class="lni lni-twitter-original"></i></a></li>
+                                <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                                <li><a href="#"><i class="lni lni-whatsapp"></i></a></li>
                             </ul>
                         </div>
-                        {% endfor %}
                     </div>
                 </div>
                 <div class="col-lg-7 col-12">
-                    <img src="{{ asset('static/image.jpg') }}" alt="" width="768" height="700">
+                    <img src="{{ asset('static/contact.jpg') }}" alt="" width="700" height="500">
                 </div>
             </div>
         </div>

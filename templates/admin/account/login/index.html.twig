@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title 'Se connecter au Back Office' %}
+
 {% block body %}
 <div class="breadcrumbs">
     <div class="container">
@@ -28,41 +30,24 @@
                     <h4 class="title">Se connecter</h4>
                     <form action="#!" method="post">
                         <div class="form-group">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
                             <label>Email</label>
-                            <input name="email" type="email">
+                            <input name="email" type="email" value="{{ last_username }}" id="inputEmail" class="form-control form-control-lg" autofocus>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input name="password" type="password">
+                            <input name="password" type="password" id="inputPassword" class="form-control form-control-lg">
                         </div>
-{#                        <div class="check-and-pass">#}
-{#                            <div class="row align-items-center">#}
-{#                                <div class="col-lg-6 col-md-6 col-12">#}
-{#                                    <div class="form-check">#}
-{#                                        <input type="checkbox" class="form-check-input width-auto" id="exampleCheck1">#}
-{#                                        <label class="form-check-label">Remember me</label>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="col-lg-6 col-md-6 col-12">#}
-{#                                    <a href="javascript:void(0)" class="lost-pass">Lost your password?</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
+                        <div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        </div>
+
                         <div class="button">
                             <button type="submit" class="btn">Connexion</button>
                         </div>
-{#                        <div class="alt-option">#}
-{#                            <span>Or</span>#}
-{#                        </div>#}
-{#                        <div class="socila-login">#}
-{#                            <ul>#}
-{#                                <li><a href="javascript:void(0)" class="facebook"><i class="lni lni-facebook-original"></i>Login With#}
-{#                                        Facebook</a></li>#}
-{#                                <li><a href="javascript:void(0)" class="google"><i class="lni lni-google"></i>Login With Google#}
-{#                                        Plus</a>#}
-{#                                </li>#}
-{#                            </ul>#}
-{#                        </div>#}
+
                         <p class="outer-link">Vous n'avez pas de compte? <a href="{{ path('app_register') }}">Créez un ici</a>
                         </p>
                     </form>

@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <style>
-        .form-style {
-            height: 50px;
-            width: 100%;
-            border: 1px solid #eee;
-            color: #081828;
-            background: #fff;
-            padding: 0 20px;
-        }
-    </style>
-{% endblock %}
+{#{% block stylesheets %}#}
+{#    <style>#}
+{#        .form-style {#}
+{#            height: 50px;#}
+{#            width: 100%;#}
+{#            border: 1px solid #eee;#}
+{#            color: #081828;#}
+{#            background: #fff;#}
+{#            padding: 0 20px;#}
+{#        }#}
+{#    </style>#}
+{#{% endblock %}#}
 
 
 {% block body %}
@@ -19,7 +19,7 @@
     {% include 'list/breadcrumb/index.html.twig' %}
 
 <section class="category-page section">
-    <div class="container">
+    <div class="container js-filter">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-12">
                 {% include 'list/search/index.html.twig' %}
@@ -41,39 +41,16 @@
                             </div>
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
-                                    <div class="row">
-                                        {% for property in properties %}
-                                        <div class="col-lg-4 col-md-6 col-12">
-
-                                            <div class="single-item-grid">
-                                                <div class="image">
-                                                    <a href="#"><img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb')}}" alt="{{ property.title }}"></a>
-                                                    <i class="cross-badge lni lni-bolt"></i>
-                                                    <span class="flat-badge sale">{{ property.type }}</span>
-                                                </div>
-                                                <div class="content">
-                                                    {% for category in property.categories %}
-                                                        <a href="#" class="tag">{{ category.name }}</a>
-                                                    {% endfor %}
-
-                                                    <h3 class="title">
-                                                        <a href="#">{{ property.title }}</a>
-                                                    </h3>
-                                                    <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                                            </i>{{ property.quarter }}</a></p>
-                                                    <ul class="info">
-                                                        <li class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
+                                    <div class="row js-filter-content">
+                                        {# {% for property in properties %} #}
+                                            {% include 'list/content/card.html.twig' %}
+                                        {# {% endfor %} #}
 
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <div class="pagination left">
-                                                {{ knp_pagination_render(properties, 'layouts/pagination.html.twig') }}
+                                            <div class="pagination left js-filter-pagination">
+                                               {% include 'list/content/pagination.html.twig' %}
                                             </div>
                                         </div>
                                     </div>

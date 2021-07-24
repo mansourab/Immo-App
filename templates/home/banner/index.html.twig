@@ -1,12 +1,14 @@
 <section class="hero-area overlay">
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
+            <div class="col-12">
                 <div class="hero-text text-center">
 
                     <div class="section-heading">
-                        <h2 class="wow fadeInUp" data-wow-delay=".3s">Bienvenu sur le site Haya</h2>
+                        <h2 class="wow fadeInUp" data-wow-delay=".3s">Les Annonces Immobilières</h2>
                         <p class="wow fadeInUp" data-wow-delay=".5s">Achat, Vente et Location de biens immobiliers au Niger</p>
+
+                        {% include 'home/banner/categories/index2.html.twig' %}
                     </div>
 
                 </div>
@@ -14,4 +16,18 @@
         </div>
     </div>
 </section>
+
+{% block stylesheets %}
+    <style>
+
+        .categories.style2 .single-cat {
+            background: #fff;
+        }
+
+        .hero-area.overlay {
+            padding-bottom: 100px;
+        }
+
+    </style>
+{% endblock %}
 

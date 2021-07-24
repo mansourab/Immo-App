@@ -116,7 +116,7 @@ class PropertyRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->orderBy('p.createdAt', 'DESC')
-            ->setMaxResults(6)
+            ->setMaxResults(8)
             ->getQuery()
             ->getResult()
         ;
@@ -126,12 +126,24 @@ class PropertyRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->join('p.type', 't')
-            ->andWhere('t.id = 2')
+            ->andWhere('t.id = 1')
             ->orderBy('p.createdAt', 'DESC')
             ->setMaxResults(8)
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findLatestSale()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.type', 's')
+            ->andWhere('s.id = 2')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(8)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
 }

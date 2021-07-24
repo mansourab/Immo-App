@@ -23,6 +23,7 @@
         "@popperjs/core": "^2.9.2",
         "animate.css": "^4.1.1",
         "bootstrap": "^5.0.2",
+        "flip-toolkit": "^7.0.13",
         "glightbox": "^3.0.9",
         "jquery": "^3.6.0",
         "popper.js": "^1.16.1",

@@ -44,8 +44,6 @@ class SearchForm extends AbstractType
                 'required' => false,
                 'class' => Type::class,
                 'placeholder' => 'Choisir Type de Bien'
-                // 'expanded' => true,
-                // 'multile' => true
             ])
             // ->add('min', NumberType::class, [
             //     'label' => false,

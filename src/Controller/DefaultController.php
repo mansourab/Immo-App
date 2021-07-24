@@ -9,6 +9,7 @@ use App\Form\SearchForm;
 use App\Repository\ContactRepository;
 use App\Repository\PropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,11 +26,13 @@ class DefaultController extends AbstractController
 
         $latestForRent = $repo->findLatestRent();
 
-        $properties = $repo->findAll();
+        $latestForSale = $repo->findLatestSale();
+
+//        $properties = $repo->findAll();
 
         return $this->render('home/index.html.twig', [
             'latest_properties' => $latestProperties,
-            'properties' => $properties,
+            'latest_sale' => $latestForSale,
             'latest_rent' => $latestForRent,
         ]);
     }
@@ -59,6 +62,13 @@ class DefaultController extends AbstractController
 
         $properties = $repo->findSearch($data);
 
+        // if ($request->get('ajax')) {
+        //     return new JsonResponse([
+        //         'content' => $this->renderView('list/content/card.html.twig', ['properties' => $properties]),
+        //         // 'sorting' => $this->renderView('list/content/sorting.html.twig', ['properties' => $properties]),
+        //         'pagination' => $this->renderView('list/content/pagination.html.twig', ['properties' => $properties])
+        //     ]);
+        // }
 
         return $this->render('list/index.html.twig', [
             'properties' => $properties,
@@ -79,13 +89,10 @@ class DefaultController extends AbstractController
      * @Route("/contact", name="app_contact")
      * @return [type] [description]
      */
-    public function contact(ContactRepository $repository)
+    public function contact()
     {
-        $contacts = $repository->activate();
 
-        return $this->render('contact/index.html.twig', [
-            'contacts' => $contacts
-        ]);
+        return $this->render('contact/index.html.twig');
     }
 
     /**

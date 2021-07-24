@@ -101,7 +101,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         $this->flashBag->add('success', 'You are logged');
 
 
-        return new RedirectResponse($this->urlGenerator->generate('app_home_index'));
+        return new RedirectResponse($this->urlGenerator->generate('app_admin_index'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

@@ -14,23 +14,49 @@
                         </button>
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
+
                                 <li class="nav-item">
-                                    <a href="{{ path('app_home') }}">Accueil</a>
+                                    <a 
+                                        {% if route_name == "app_home" %} class="active" {% endif %}
+                                        href="{{ path('app_home') }}" aria-label="Toggle navigation"
+                                    >
+                                        Accueil
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a 
+                                        {% if route_name == "app_annonces" %} class="active" {% endif %}
+                                        href="{{ path('app_annonces') }}" aria-label="Toggle navigation"
+                                    >
+                                        Annonces Immobilières
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a 
+                                        {% if route_name == "app_about" %} class="active" {% endif %}
+                                        href="{{ path('app_about') }}" aria-label="Toggle navigation"
+                                    >
+                                        A propos
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ path('app_annonces') }}" aria-label="Toggle navigation">Annonces Immobilières</a>
+                                    <a 
+                                        {% if route_name == "app_contact" %} class="active" {% endif %}
+                                        href="{{ path('app_contact') }}" aria-label="Toggle navigation"
+                                    >
+                                        Contact
+                                    </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a href="{{ path('app_about') }}">A propos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ path('app_contact') }}">Contact</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#">Blog</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ path('app_admin_index') }}">Admin</a>
+                                    <a 
+                                        {% if route_name == "app_admin_index" %} class="active" {% endif %}
+                                        href="{{ path('app_admin_index') }}" aria-label="Toggle navigation"
+                                    >
+                                        Admin
+                                    </a>
                                 </li>
                             </ul>
                         </div> 

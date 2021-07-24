@@ -8,13 +8,6 @@
                             <div class="main-img">
                                 <img src="{{ vich_uploader_asset(property) | imagine_filter('detail_thumb')}}" id="current" alt="#">
                             </div>
-{#                            <div class="images">#}
-{#                                <img src="{{ asset('build/images/item-details/image1.jpg') }}" class="img" alt="#">#}
-{#                                <img src="{{ asset('build/images/item-details/image2.jpg') }}" class="img" alt="#">#}
-{#                                <img src="{{ asset('build/images/item-details/image3.jpg') }}" class="img" alt="#">#}
-{#                                <img src="{{ asset('build/images/item-details/image4.jpg') }}" class="img" alt="#">#}
-{#                                <img src="{{ asset('build/images/item-details/image5.jpg') }}" class="img" alt="#">#}
-{#                            </div>#}
                         </main>
                     </div>
                 </div>
@@ -71,7 +64,13 @@
                                     <a href="tel:+002562352589" class="call">
                                         <i class="lni lni-phone-set"></i>
                                         +227 89 375 348
-                                        <span>Appeler pour réserver</span>
+                                        <span>
+                                            {% if property.type == 'A Vendre' %}
+                                                Faites une proposition
+                                            {% else %}
+                                                Appeler pour réserver
+                                            {% endif %}
+                                        </span>
                                     </a>
                                 </li>
                                 <li>

@@ -100,7 +100,13 @@
                                         <ul class="action-btn">
                                             <li><a href="{{ path('app_property_edit', {id: property.id}) }}"><i class="lni lni-pencil"></i></a></li>
 {#                                            <li><a href="{{ path('app_property_show', {id: property.id}) }}"><i class="lni lni-eye"></i></a></li>#}
-                                            <li><a href="#"><i class="lni lni-trash"></i></a></li>
+                                            <li>
+                                                <form method="post" action="{{ path('app_property_delete', {'id': property.id}) }}" onsubmit="return confirm('Etes vous sure de vouloir effacer cette annonce ?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
+                                                    <button class="btn"><i class="lni lni-trash"></i></button>
+                                                </form>
+                                            </li>   
+                                            {# <li><a href="#"><i class="lni lni-trash"></i></a></li> #}
                                         </ul>
                                     </div>
                                 </div>
@@ -128,3 +134,4 @@
     </div>
 </section>
 {% endblock %}
+

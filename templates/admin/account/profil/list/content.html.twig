@@ -54,7 +54,8 @@
                                         <p>{{ user.id }}</p>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-12">
-                                        <p>{{ user.avatar }}</p>
+                                        {# <p>{{ user.avatar }}</p> #}
+                                        <img src="{{ vich_uploader_asset(user) }}" width="60" height="60"/>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-12">
                                         <p>{{ user.firstName }}</p>
@@ -68,7 +69,7 @@
                                     <div class="col-lg-2 col-md-2 col-12 align-right">
                                         <ul class="action-btn">
                                             <li><a href="{{ path('app_user_edit', {id: user.id}) }}"><i class="lni lni-pencil"></i></a></li>
-                                            <li><a href="#"><i class="lni lni-trash-can"></i></a></li>
+                                            <li><a href="#"><i class="lni lni-trash"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
