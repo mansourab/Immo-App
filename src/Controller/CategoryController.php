@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Flasher\Toastr\Prime\ToastrFactory;
 
+/**
+ * @Route("/back-office")
+ */
 class CategoryController extends AbstractController
 {
 
@@ -23,7 +26,7 @@ class CategoryController extends AbstractController
 
 
     /**
-     * @Route("admin/category/index", name="app_category_index")
+     * @Route("/category/index", name="app_category_index")
      */
     public function list_category(CategoryRepository $categoryRepository)
     {
@@ -33,7 +36,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("admin/category/new", name="app_category_new")
+     * @Route("/category/new", name="app_category_new")
      */
     public function new_category(Request $request, EntityManagerInterface $manager)
     {
@@ -57,7 +60,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("category/edit/{id}", name="app_category_edit")
+     * @Route("/category/edit/{id}", name="app_category_edit")
      */
     public function edit_category(Request $request, EntityManagerInterface $manager, Category $category)
     {

@@ -1,0 +1,74 @@
+<section class="dashboard section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+
+                {% include 'admin/partials/menu.html.twig' %}
+
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="main-content">
+
+                    <div class="dashboard-block mt-0">
+                        <h3 class="block-title">Les Régions du Niger</h3>
+
+                        <nav class="list-nav">
+                            <ul>
+                                <li class="active"><a href="#">Les régions disponible <span>{{ states | length }}</span></a></li>
+                                <li class="align-right">
+                                <a href="{{ path('app_state_new') }}" class="btn">Ajouter une nouvelle région</a>
+                                </li>
+                            </ul>
+
+                        </nav>
+
+
+                        <div class="my-items">
+
+                            <div class="item-list-title">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-3 col-md-2 col-12">
+                                        <p>Id</p>
+                                    </div>
+                                    <div class="col-lg-4 col-md-5 col-12">
+                                        <p>Name</p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-12 align-right">
+                                        <p>Actions</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="single-item-list">
+                                {% for state in states %}
+
+                                <div class="row align-items-center bg-light mb-4">
+                                    <div class="col-lg-3 col-md-2 col-12">
+                                        <p>{{ state.id }}</p>
+                                    </div>
+                                    <div class="col-lg-4 col-md-5 col-12">
+                                        <p>{{ state.name }}</p>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-12 align-right">
+                                        <ul class="action-btn">
+                                            <li><a href="{{ path('app_state_edit', {id: state.id}) }}"><i class="lni lni-pencil"></i></a></li>
+                                            <li>
+                                                <form method="post" action="{{ path('app_state_delete', {'id': state.id}) }}" onsubmit="return confirm('Etes vous sure de vouloir effacer ?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ state.id) }}">
+                                                    <button class="btn"><i class="lni lni-trash"></i></button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

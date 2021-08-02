@@ -20,7 +20,7 @@
                                     </div>
                                     <h3>
                                         {{ properties | length }}
-                                        <span>Total Ad Posted</span>
+                                        <span>Nombre d'annonces</span>
                                     </h3>
                                 </div>
 
@@ -32,8 +32,8 @@
                                         <i class="lni lni-bolt"></i>
                                     </div>
                                     <h3>
-                                        23
-                                        <span>Featured Ads </span>
+                                        {{ categories | length }}
+                                        <span>Nombre de catégories</span>
                                     </h3>
                                 </div>
 
@@ -45,8 +45,8 @@
                                         <i class="lni lni-emoji-sad"></i>
                                     </div>
                                     <h3>
-                                        45
-                                        <span>Expired Ads </span>
+                                        {{ quarters | length }}
+                                        <span>Nombre de quartiers</span>
                                     </h3>
                                 </div>
 
@@ -94,12 +94,13 @@
                                         {% endfor %}
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-12">
-                                        <p>{{ property.type }}</p>
+                                        {% for type in property.types %}
+                                            <p>{{ type.name }}</p>
+                                        {% endfor %}
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-12 align-right">
                                         <ul class="action-btn">
                                             <li><a href="{{ path('app_property_edit', {id: property.id}) }}"><i class="lni lni-pencil"></i></a></li>
-{#                                            <li><a href="{{ path('app_property_show', {id: property.id}) }}"><i class="lni lni-eye"></i></a></li>#}
                                             <li>
                                                 <form method="post" action="{{ path('app_property_delete', {'id': property.id}) }}" onsubmit="return confirm('Etes vous sure de vouloir effacer cette annonce ?');">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">

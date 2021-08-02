@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
+/**
+ * @Route("/back-office")
+ */
 class UserController extends AbstractController
 {
     /**
@@ -25,7 +28,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("user/edit/{id}", name="app_user_edit", methods={"GET","POST"})
+     * @Route("/user/edit/{id}", name="app_user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user): Response
     {
@@ -33,6 +36,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('app_user_index');
@@ -45,7 +49,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("user/{id}", name="app_user_delete", methods={"POST"})
+     * @Route("/user/{id}", name="app_user_delete", methods={"POST"})
      */
     public function delete(Request $request, User $user): Response
     {

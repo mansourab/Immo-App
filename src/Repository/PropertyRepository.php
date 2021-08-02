@@ -37,7 +37,7 @@ class PropertyRepository extends ServiceEntityRepository
         return $this->paginator->paginate(
             $query,
             $search->page,
-            6
+            3
         );
     }
 
@@ -59,32 +59,16 @@ class PropertyRepository extends ServiceEntityRepository
             ->select('p', 'c', 'l', 't')
             ->join('p.categories', 'c')
             ->join('p.quarter', 'l')
-            ->join('p.type', 't')
-
+            ->join('p.types', 't')
         ;
 
 
         if (!empty($search->q)) {
             $query = $query  
-                ->andWhere('p.title LIKE :q')
+                ->andWhere('l.name LIKE :q')
                 ->setParameter('q', "%{$search->q}%")
             ;
         } 
-
-
-        if (!empty($search->quarter)) {
-            $query = $query  
-                ->andWhere('l.name LIKE :l')
-                ->setParameter('l', "%{$search->quarter}%")
-            ;
-        }
-
-        if (!empty($search->type)) {
-            $query = $query  
-                ->andWhere('t.name LIKE :t')
-                ->setParameter('t', "%{$search->type}%")
-            ;
-        }
 
 
         if (!empty($search->min) && $ignorePrice === false) {
@@ -109,9 +93,19 @@ class PropertyRepository extends ServiceEntityRepository
             ;
         }
 
+        if (!empty($search->types)) {
+            $query = $query  
+                ->andWhere('t.id IN (:types)')
+                ->setParameter('types', $search->types)
+            ;
+        }
+
         return $query;
     }
 
+    /**
+     * Les derniers biens
+     */
     public function FindLatestProperties()
     {
         return $this->createQueryBuilder('p')
@@ -122,11 +116,14 @@ class PropertyRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * Les derniers biens en location
+     */
     public function findLatestRent()
     {
         return $this->createQueryBuilder('p')
-            ->join('p.type', 't')
-            ->andWhere('t.id = 1')
+            ->join('p.types', 't')
+            ->andWhere("t.name = 'A Louer'")
             ->orderBy('p.createdAt', 'DESC')
             ->setMaxResults(8)
             ->getQuery()
@@ -134,16 +131,151 @@ class PropertyRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * Les derniers biens en vente
+     */
     public function findLatestSale()
     {
         return $this->createQueryBuilder('p')
-            ->join('p.type', 's')
-            ->andWhere('s.id = 2')
+            ->join('p.types', 's')
+            ->andWhere("s.name = 'A Vendre'")
             ->orderBy('p.createdAt', 'DESC')
             ->setMaxResults(8)
             ->getQuery()
             ->getResult()
             ;
+    }
+
+    /**
+     * Pour la page a-propos
+     */
+    public function numberSale()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.types', 's')
+            ->andWhere("s.name = 'A Vendre'")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Pour la page a-propos
+     */
+    public function numberRent()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.types', 's')
+            ->andWhere("s.name = 'A Louer'")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Numbre d'annonces dans la ville de niamey
+     */
+    public function findNiamey()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.state', 's')
+            ->andWhere("s.name = 'Niamey'")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Numbre d'annonces dans la ville de Dosso
+     */
+    public function findDosso()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.state', 's')
+            ->andWhere("s.name = 'Dosso'")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Numbre d'annonces dans la ville de Maradi
+     */
+    public function findMaradi()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.state', 's')
+            ->andWhere("s.name = 'Maradi'")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Numbre d'annonces dans la ville de Zinder
+     */
+    public function findZinder()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.state', 's')
+            ->andWhere("s.name = 'Zinder'")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Numbre d'annonces dans la ville de Agadez
+     */
+    public function findAgadez()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.state', 's')
+            ->andWhere("s.name = 'Agadez'")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Numbre d'annonces dans la ville de Tillaberi
+     */
+    public function findTillaberi()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.state', 's')
+            ->andWhere("s.name = 'Tillaberi'")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    /**
+     * Numbre d'annonces dans la ville de Tahoua
+     */
+    public function findTahoua()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.state', 's')
+            ->andWhere("s.name = 'Tahoua'")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    /**
+     * Numbre d'annonces dans la ville de Diffa
+     */
+    public function findDiffa()
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.state', 's')
+            ->andWhere("s.name = 'Diffa'")
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 }

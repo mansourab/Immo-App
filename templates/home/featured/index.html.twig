@@ -3,9 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Nos Meilleures annonces</h2>
-                    {# <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem
-                        Ipsum available, but the majority have suffered alteration in some form.</p> #}
+                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Annonces Immobilières VIP</h2>
                 </div>
             </div>
         </div>
@@ -25,19 +23,19 @@
                             </a>
                             <div class="author">
                                 <div class="author-image">
-                                    <a href="javascript:void(0)">
-                                        <img src="{{ asset('build/images/items-grid/author-1.jpg') }}" alt="#">
-                                        <span>Smith jeko</span>
-                                    </a>
+                                    <img src="{{ vich_uploader_asset(property.user) }}" alt="#">
+                                    <span style="color: white";>{{ property.user.name | capitalize }}</span>
                                 </div>
-                                <p class="sale">{{ property.type }}</p>
+                                {% for type in property.types %}
+                                    <p class="sale">{{ type.name }}</p>         
+                                {% endfor %}
                             </div>
                             <p class="item-position"><i class="lni lni-bolt"></i> Mis en avant</p>
                         </div>
                         <div class="content">
                             <div class="top-content">
                                 {% for category in property.categories %}
-                                    <a href="javascript:void(0)" class="tag">{{ category.name }}</a>
+                                    <a href="#" class="tag">{{ category.name }}</a>
                                 {% endfor %}
                                 <h3 class="title">
                                     <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
@@ -45,7 +43,7 @@
 
                                 <ul class="info-list">
                                     <li><a href="#"><i class="lni lni-map-marker"></i> {{ property.quarter }}</a></li>
-                                    <li><a href=""><i class="lni lni-world"></i> Niamey</a></li>
+                                    <li><a href="#"><i class="lni lni-world"></i> {{ property.state }}</a></li>
                                 </ul>
                             </div>
                             <div class="bottom-content">

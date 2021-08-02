@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Owner;
 use App\Entity\Property;
 use App\Entity\Quarter;
+use App\Entity\State;
 use App\Entity\Type;
 use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -77,16 +78,23 @@ class PropertyFormType extends AbstractType
                 'label' => 'Property Rooms',
                 'required' => false,
             ])
-            ->add('type', EntityType::class, [
+            ->add('types', EntityType::class, [
                 'required' => false,
                 'label' => 'Property Type',
-                'class' => Type::class
+                'class' => Type::class,
+                'multiple' => true
             ])
             ->add('status', ChoiceType::class, [
                 'choices' => [
                     'Actif' => 'Actif',
-                    'Inactif' => 'Inactif'
+                    'Annuler' => 'Annuler',
+                    'Terminer' => 'Terminer'
                 ]
+            ])
+            ->add('state', EntityType::class, [
+                'required' => false,
+                'label' => 'Choose State',
+                'class' => State::class
             ])
             // ->add('status', TextType::class, [
             //     'required' => false,

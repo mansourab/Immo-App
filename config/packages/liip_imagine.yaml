@@ -70,3 +70,21 @@ liip_imagine:
                 thumbnail:
                     size: [50, 50]
                     mode: outbound
+
+        about_image:
+            filters:
+                thumbnail:
+                    size: [546, 422]
+                    mode: outbound
+
+        state_image:
+            filters:
+                thumbnail:
+                    size: [416, 284]
+                    mode: outbound
+
+        state_image_long:
+            filters:
+                thumbnail:
+                    size: [635, 325]
+                    mode: outbound

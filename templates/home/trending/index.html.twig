@@ -30,7 +30,9 @@
                                     <div class="image">
                                         <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}"><img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb') }}" alt="#"></a>
                                         <i class=" cross-badge lni lni-bolt"></i>
-                                        <span class="flat-badge sale">{{ property.type }}</span>
+                                        {% for type in property.types %}
+                                            <span class="flat-badge sale">{{ type.name }}</span>
+                                        {% endfor %}
                                     </div>
                                     <div class="content">
                                         {% for category in property.categories %}
@@ -40,11 +42,11 @@
                                             <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
                                         </h3>
                                         <p class="location">
-                                            <span class="tag"><i class="lni lni-map-marker"></i> {{ property.quarter }}, Niamey</span>
+                                            <span class="tag"><i class="lni lni-map-marker"></i> {{ property.quarter }}, {{ property.state }}</span>
                                         </p>
                                         <ul class="info">
                                             <li class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</li>
-                                            <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
+                                            <li class="like"><a href="{{ path('app_annonce_detail', {slug: property.slug}) }}"><i class="lni lni-eye"></i></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -63,7 +65,10 @@
                                     <div class="image">
                                         <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}"><img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb') }}" alt="#"></a>
                                         <i class=" cross-badge lni lni-bolt"></i>
-                                        <span class="flat-badge sale">{{ property.type }}</span>
+                                        {% for type in property.types %}
+                                            <span class="flat-badge sale">{{ type.name }}</span>
+                                        {% endfor %}
+                                        
                                     </div>
                                     <div class="content">
                                         {% for category in property.categories %}
@@ -73,7 +78,7 @@
                                             <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
                                         </h3>
                                         <p class="location">
-                                            <span class="tag"><i class="lni lni-map-marker"></i>{{ property.quarter }}, Niamey</span>
+                                            <span class="tag"><i class="lni lni-map-marker"></i>{{ property.quarter }}, {{ property.state }}</span>
                                         </p>
                                         <ul class="info">
                                             <li class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</li>
@@ -95,7 +100,9 @@
                                     <div class="image">
                                         <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}"><img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb') }}" alt="#"></a>
                                         <i class=" cross-badge lni lni-bolt"></i>
-                                        <span class="flat-badge sale">{{ property.type }}</span>
+                                        {% for type in property.types %}
+                                            <span class="flat-badge sale">{{ type.name }}</span>
+                                        {% endfor %}
                                     </div>
                                     <div class="content">
                                         {% for category in property.categories %}
@@ -105,7 +112,7 @@
                                             <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
                                         </h3>
                                         <p class="location">
-                                            <span class="tag"><i class="lni lni-map-marker"></i>{{ property.quarter }}, Niamey</span>
+                                            <span class="tag"><i class="lni lni-map-marker"></i>{{ property.quarter }}, {{ property.state }}</span>
                                         </p>
                                         <ul class="info">
                                             <li class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</li>

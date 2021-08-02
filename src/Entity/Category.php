@@ -28,6 +28,7 @@ class Category
      * @ORM\ManyToMany(targetEntity=Property::class, mappedBy="categories")
      */
     private $properties;
+    
 
     public function __construct()
     {

@@ -9,8 +9,8 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-lg-6 col-md-12 col-12">
                 <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
-                    <img src="{{ asset('build/images/about/choose-left.jpg') }}" alt="#">
-{#                    <a href="https://www.youtube.com/watch?v=r44RKWyfcFw&amp;fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM" class="glightbox video"><i class="lni lni-play"></i></a>#}
+                    {# <img src="{{ asset('build/images/about/choose-left.jpg') }}"> #}
+                    <img src="{{ asset('static/about1.jpg') | imagine_filter('about_image')}}">
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-12">
@@ -28,15 +28,15 @@
                         Bienvenue sur le portail des annonces immobilières au Niger. <br>
                     </p>
                     <p class="mt-2">
-                        Haya est la plateforme pour la location, achat et vente des biens immobiliers au Niger. <br>
+                        Haya est une plateforme spécialisée dans la location, l'achat et la vente des biens immobiliers au Niger. <br>
                     </p>
                     <h3>Notre Mission</h3>
                     <p class="mb-2">
-                        <i class="lni lni-checkmark lni-16"></i>  Fournir de cadre idéal pour la publication en ligne de vos annonces ;
+                        1.  Fournir de cadre idéal pour la publication en ligne de vos annonces
                     </p>
 
                     <p class="mb-2">
-                        <i class="lni lni-checkmark lni-16"></i>  mettre en relation les futures locataires/acquéreurs et les bailleurs ;
+                        2.  Mettre en relation les futures locataires/acquéreurs et les bailleurs
                     </p>
 
                 </div>
@@ -49,28 +49,16 @@
 <section class="our-achievement section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-12">
+            <div class="col-lg-6 col-md-6 col-12">
                 <div class="single-achievement wow fadeInUp" data-wow-delay=".2s">
-                    <h3 class="counter"><span id="secondo1" class="countup" cup-end="1250">1250</span>+</h3>
-                    <p>Regular Ads</p>
+                    <h3 class="counter">{{ envente | length }}</h3>
+                    <p>Biens En Vente</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-12">
+            <div class="col-lg-6 col-md-6 col-12">
                 <div class="single-achievement wow fadeInUp" data-wow-delay=".4s">
-                    <h3 class="counter"><span id="secondo2" class="countup" cup-end="350">350</span>+</h3>
-                    <p>Locations</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-12">
-                <div class="single-achievement wow fadeInUp" data-wow-delay=".6s">
-                    <h3 class="counter"><span id="secondo3" class="countup" cup-end="2500">2500</span>+</h3>
-                    <p>Reguler Members</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-12">
-                <div class="single-achievement wow fadeInUp" data-wow-delay=".6s">
-                    <h3 class="counter"><span id="secondo3" class="countup" cup-end="250">250</span>+</h3>
-                    <p>Premium Ads</p>
+                    <h3 class="counter">{{ enlocation | length }}</h3>
+                    <p>Biens En Locations</p>
                 </div>
             </div>
         </div>
@@ -84,8 +72,6 @@
             <div class="col-12">
                 <div class="section-title">
                     <h2 class="wow fadeInUp" data-wow-delay=".4s">Comment ça marche</h2>
-{#                    <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem#}
-{#                        Ipsum available, but the majority have suffered alteration in some form.</p>#}
                 </div>
             </div>
         </div>
@@ -112,7 +98,7 @@
                         Nous mettons à votre disposition un catalogue de biens immobiliers pour la location et la vente. Faites une recherche et filtrer le resultat en fonction de vos critères.
                     </p>
                     <div class="link-light mt-4">
-                        <a href="#" class="btn">Voir notre catalogue</a>
+                        <a href="{{ path('app_annonces') }}" class="btn">Voir notre catalogue</a>
                     </div>
                 </div>
 
@@ -121,8 +107,14 @@
 
                 <div class="single-work wow fadeInUp" data-wow-delay=".6s">
                     <span class="serial">03</span>
-                    <h3>Sell Your Item</h3>
-                    <p>Lorem ipsum dolor sit amet constur adipisicing sed do eiusmod tempor incididunt labore.</p>
+                    <h3>Informations</h3>
+                    <p>
+                        Pour de plus amples informations, veuillez nous contacter, par téléphone, mail, whatsapp... 
+                        sur les réseaux sociaux Facebook et Twitter. Nous sommes à votre disposition.
+                    </p>
+                    <div class="link-light mt-4">
+                        <a href="{{ path('app_contact') }}" class="btn">Aller à la page des contacts</a>
+                    </div>
                 </div>
 
             </div>

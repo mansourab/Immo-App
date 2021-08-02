@@ -1,71 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{#{% block stylesheets %}#}
-{#    <style>#}
-{#        .form-style {#}
-{#            height: 50px;#}
-{#            width: 100%;#}
-{#            border: 1px solid #eee;#}
-{#            color: #081828;#}
-{#            background: #fff;#}
-{#            padding: 0 20px;#}
-{#        }#}
-{#    </style>#}
-{#{% endblock %}#}
-
 
 {% block body %}
 
     {% include 'list/breadcrumb/index.html.twig' %}
 
-<section class="category-page section">
-    <div class="container js-filter">
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-12">
-                {% include 'list/search/index.html.twig' %}
-            </div>
+    <section class="category-page section">
+    
+        <div class="container js-filter">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-12">
+                    {% include 'list/search/index.html.twig' %}
+                </div>
 
-            <div class="col-lg-9 col-md-8 col-12">
-                <div class="category-grid-list">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="category-grid-topbar">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-6 col-md-6 col-12">
-                                        <h3 class="title">Showing 1-12 of 21 ads found</h3>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-12">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
-                                    <div class="row js-filter-content">
-                                        {# {% for property in properties %} #}
-                                            {% include 'list/content/card.html.twig' %}
-                                        {# {% endfor %} #}
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="pagination left js-filter-pagination">
-                                               {% include 'list/content/pagination.html.twig' %}
-                                            </div>
+                <div class="col-lg-9 col-md-8 col-12">
+                    <div class="category-grid-list">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="category-grid-topbar">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <h3 class="title">Showing {{ properties | length }} found</h3>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                        
                                         </div>
                                     </div>
+                                </div>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+
+                                        <div class="row js-filter-content">
+
+                                            {% include 'list/content/card.html.twig' %}
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-12">
+
+                                                <div class="pagination left js-filter-pagination">
+
+                                                {% include 'list/content/pagination.html.twig' %}
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
 
                                 </div>
-
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 {% endblock %}
 

@@ -8,13 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  * @Vich\Uploadable
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface, \Serializable
 {
@@ -27,6 +28,8 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(message="L'email '{{ value }}' n'est pas valide ")
+     * 
      */
     private $email;
 
@@ -44,12 +47,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $lastname;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -57,20 +55,24 @@ class User implements UserInterface, \Serializable
     private $avatar;
 
     /**
+     * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="avatar")
+     * @var File|null
+     * @Assert\Image()
+     */
+    private $avatarFile;
+
+    /**
      * @ORM\OneToMany(targetEntity=Property::class, mappedBy="user")
      */
     private $properties;
-
-    /**
-     * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="avatar")
-     * @var File|null
-     */
-    private $avatarFile;
+    
 
     public function __construct()
     {
         $this->properties = new ArrayCollection();
     }
+
+    
 
     public function getId(): ?int
     {
@@ -153,26 +155,14 @@ class User implements UserInterface, \Serializable
         // $this->plainPassword = null;
     }
 
-    public function getFirstname(): ?string
+    public function getName(): ?string
     {
-        return $this->firstname;
+        return $this->name;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setName(string $name): self
     {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
-    public function setLastname(string $lastname): self
-    {
-        $this->lastname = $lastname;
+        $this->name = $name;
 
         return $this;
     }
@@ -187,6 +177,48 @@ class User implements UserInterface, \Serializable
         $this->avatar = $avatar;
 
         return $this;
+    }
+
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    public function setAvatarFile(?File $avatarFile = null)
+    {
+        $this->avatarFile = $avatarFile;
+
+        return $this;
+    }
+
+    public function serialize()
+    {
+        // $this->avatarFile = base64_encode($this->avatarFile);
+        return serialize(array(
+            $this->id,
+            // $this->avatarFile,
+            $this->email,
+            // $this->name,
+            $this->password,
+            // $this->avatar,
+            // $this->roles
+        
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        // $this->avatarFile = base64_decode($this->avatarFile);
+        list (
+            $this->id,
+            // $this->avatarFile,
+            $this->email,
+            // $this->name,
+            $this->password,
+            // $this->avatar,
+            // $this->roles
+        ) = unserialize($serialized);
+
     }
 
     /**
@@ -217,37 +249,5 @@ class User implements UserInterface, \Serializable
         }
 
         return $this;
-    }
-
-    /**
-     * @return File|null
-     */
-    public function getAvatarFile(): ?File
-    {
-        return $this->avatarFile;
-    }
-
-    public function setAvatarFile(?File $avatarFile = null)
-    {
-        $this->avatarFile = $avatarFile;
-
-        return $this;
-    }
-
-    public function serialize() {
-
-        return serialize(array(
-            $this->id,
-            $this->email,
-            $this->password,
-        ));
-    }
-
-    public function unserialize($serialized) {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-        ) = unserialize($serialized);
     }
 }

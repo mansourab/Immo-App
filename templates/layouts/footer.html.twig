@@ -1,8 +1,11 @@
 <footer class="footer">
 
     <div class="footer-top">
+
         <div class="container">
+
             <div class="row">
+
                 <div class="col-lg-3 col-md-6 col-12">
 
                     <div class="single-footer mobile-app">
@@ -26,32 +29,43 @@
                     </div>
 
                 </div>
+
                 <div class="col-lg-3 col-md-6 col-12">
 
                     <div class="single-footer f-link">
+
                         <h3>Ménu</h3>
-                        {# <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12"> #}
-                                <ul>
-                                    <li class="mb-4"><a href="#"><i class="lni lni-home"></i> Accueil</a></li>
-                                    <li class="mb-4"><a href="#"><i class="lni lni-apartment"></i> Annonces Immobilières</a></li>
-                                    <li><a href="#"><i class="lni lni-consulting"></i> A propos</a></li>
-                                </ul>
-                            {# </div> #}
-                            {# <div class="col-lg-6 col-md-6 col-12">
-                            </div> #}
-                        {# </div> #}
+
+                        <ul>
+                            <li class="mb-4"><a href="{{ path('app_home') }}">
+                                <i class="lni lni-home"></i> Accueil</a>
+                            </li>
+
+                            <li class="mb-4"><a href="{{ path('app_annonces') }}">
+                                <i class="lni lni-apartment"></i> Annonces Immobilières</a>
+                            </li>
+
+                            <li><a href="{{ path('app_about') }}">
+                                <i class="lni lni-consulting"></i> A propos</a>
+                            </li>
+                        </ul>
+
                     </div>
 
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
 
                     <div class="single-footer f-contact">
+
                         <h3>Contact</h3>
+
                         <ul>
                             <li><i class="lni lni-map-marker"></i> Niamey/Niger</li>
+
                             <li><i class="lni lni-phone-set"></i> +(227) 89-37-53-48</li>
+
                             <li><i class="lni lni-envelope"></i> haya@gmail.com</li>
+
                         </ul>
                     </div>
 
@@ -60,19 +74,29 @@
                 <div class="col-lg-3 col-md-6 col-12">
 
                     <div class="single-footer f-contact">
+
                         <h3>Réseaux Sociaux</h3>
+
                         <ul>
-                            <li><i class="lni lni-facebook-original"></i>  <a href="#">Facebook</a></li>
-                            <li><a href="#"><i class="lni lni-twitter-original"></i></a>  Twitter</li>
-                            <li><a href="#"><i class="lni lni-linkedin-original"></i></a>  LinkedIn</li>
-                            <li><a href="#"><i class="lni lni-whatsapp"></i></a>  Whatsapp</li>
+
+                            <li><i class="lni lni-facebook-original"></i> <a href="{{ facebook }}" style="color: white;"> Facebook</a></li>
+
+                            <li><i class="lni lni-twitter-original"></i> <a href="#" style="color: white;"> Twitter</a></li>
+
+                            <li><i class="lni lni-linkedin-original"></i> <a href="#" style="color: white;"> LinkedIn</a></li>
+
+                            <li><i class="lni lni-whatsapp"></i> <a href="#" style="color: white;"> Whatsapp</a></li>
+
                         </ul>
+
                     </div>
 
                 </div>
 
             </div>
+            
         </div>
+
     </div>
     
 </footer>

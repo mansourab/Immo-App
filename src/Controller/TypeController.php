@@ -13,6 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Flasher\Toastr\Prime\ToastrFactory;
 
 
+/**
+ * @Route("/back-office")
+ */
 class TypeController extends AbstractController
 {
 
@@ -26,7 +29,7 @@ class TypeController extends AbstractController
 
 
     /**
-     * @Route("/admin/type/index", name="app_type_index")
+     * @Route("/type/index", name="app_type_index")
      */
     public function index(TypeRepository $repository)
     {
@@ -38,7 +41,7 @@ class TypeController extends AbstractController
     }
 
     /**
-     * @Route("/admin/type/new", name="app_type_new")
+     * @Route("/type/new", name="app_type_new")
      */
     public function new(EntityManagerInterface $em, Request $request): Response
     {
@@ -61,7 +64,7 @@ class TypeController extends AbstractController
     }
 
     /**
-     * @Route("/admin/type/edit/{id}", name="app_type_edit")
+     * @Route("/type/edit/{id}", name="app_type_edit")
      */
     public function edit(Type $type, Request $request, EntityManagerInterface $em)
     {
@@ -82,7 +85,7 @@ class TypeController extends AbstractController
     }
 
     /**
-     * @Route("/admin/type/{id}", name="app_type_delete", methods={"POST"})
+     * @Route("/type/{id}", name="app_type_delete", methods={"POST"})
      */
     public function delete_category(Request $request, Type $type)
     {

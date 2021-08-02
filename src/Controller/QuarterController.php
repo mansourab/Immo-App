@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Quarter;
 use App\Form\QuarterFormType;
 use App\Repository\QuarterRepository;
@@ -10,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/back-office")
+ */
 class QuarterController extends AbstractController
 {
 
@@ -33,6 +37,7 @@ class QuarterController extends AbstractController
         $quarter = new Quarter;
 
         $form = $this->createForm(QuarterFormType::class, $quarter);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -54,9 +59,11 @@ class QuarterController extends AbstractController
     public function edit(Quarter $quarter, Request $request, EntityManagerInterface $em)
     {
         $form = $this->createForm(QuarterFormType::class, $quarter);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em->flush();
 
             return $this->redirectToRoute('app_quarter_index');

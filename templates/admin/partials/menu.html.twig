@@ -2,8 +2,8 @@
     <div class="user-image">
         {% if app.user %}
             <img src="{{ vich_uploader_asset(app.user) | imagine_filter('admin_user_avatar') }}" alt="#">
-            <h3>Steve Aldridge
-                <span><a href="javascript:void(0)">@username</a></span>
+            <h3>{{ app.user.name}}
+                <span><a href="#">{{ app.user.email }}</a></span>
             </h3>
         {% endif %}
 
@@ -21,6 +21,17 @@
             <li>
                 <a {% if route_name == "app_property_new" %} class="active" {% endif %} href="{{ path('app_property_new') }}">
                     <i class="lni lni-circle-plus"></i> Ajouter une annonce
+                </a>
+            </li>
+            
+            <li>
+                <a {% if route_name == "app_annonce_terminer" %} class="active" {% endif %} href="{{ path('app_annonce_terminer') }}">
+                    <i class="lni lni-circle-plus"></i> Annonces Terminées
+                </a>
+            </li>
+            <li>
+                <a {% if route_name == "app_property_new" %} class="active" {% endif %} href="{{ path('app_property_new') }}">
+                    <i class="lni lni-circle-plus"></i> Annonces Annulées
                 </a>
             </li>
             <li>
@@ -44,13 +55,19 @@
                 </a>
             </li>
             <li>
+                <a {% if route_name == "app_state_index" %} class="active" {% endif %} href="{{ path('app_state_index') }}">
+                    <i class="lni lni-circle-plus"></i> Les Régions
+                </a>
+            </li>
+            <li>
                 <a {% if route_name == "app_user_index" %} class="active" {% endif %} href="{{ path('app_user_index') }}">
                     <i class="lni lni-user"></i> Les Utilisateurs
                 </a>
             </li>
+            
         </ul>
         <div class="button">
-            <a class="btn" href="#">Logout</a>
+            <a class="btn" href="{{ path('app_logout') }}">Logout</a>
         </div>
     </div>
 </div>

@@ -31,13 +31,11 @@
                                     <div class="col-lg-2 col-md-2 col-12">
                                         <p>avatar</p>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-12">
-                                        <p>FirstName</p>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-12">
-                                        <p>LastName</p>
-                                    </div>
+                                    
                                     <div class="col-lg-3 col-md-3 col-12">
+                                        <p>Name</p>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-12">
                                         <p>Email</p>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-12 align-right">
@@ -57,13 +55,11 @@
                                         {# <p>{{ user.avatar }}</p> #}
                                         <img src="{{ vich_uploader_asset(user) }}" width="60" height="60"/>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-12">
-                                        <p>{{ user.firstName }}</p>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-12">
-                                        <p>{{ user.lastName }}</p>
-                                    </div>
                                     <div class="col-lg-3 col-md-3 col-12">
+                                        <p>{{ user.name }}</p>
+                                    </div>
+                                    
+                                    <div class="col-lg-4 col-md-4 col-12">
                                         <p>{{ user.email }}</p>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-12 align-right">

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginAuthenticator;
@@ -12,6 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
+
+/**
+ * @Route("/back-office")
+ */
 class RegistrationController extends AbstractController
 {
     /**
@@ -19,13 +24,14 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginAuthenticator $authenticator): Response
     {
-        $user = new User;
-        
+        $user = new User();
+
         $form = $this->createForm(RegistrationFormType::class, $user);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -34,11 +40,20 @@ class RegistrationController extends AbstractController
             );
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('app_login');
+            $entityManager->persist($user);
+
+            $entityManager->flush();
+            
+
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' 
+            );
         }
+
 
         return $this->render('admin/account/register/index.html.twig', [
             'form' => $form->createView(),

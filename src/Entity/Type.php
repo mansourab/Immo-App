@@ -25,11 +25,11 @@ class Type
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Property::class, mappedBy="type")
+     * @ORM\ManyToMany(targetEntity=Property::class, mappedBy="types")
      */
     private $properties;
 
-
+    
     public function __construct()
     {
         $this->properties = new ArrayCollection();
@@ -52,6 +52,12 @@ class Type
         return $this;
     }
 
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * @return Collection|Property[]
      */
@@ -64,7 +70,7 @@ class Type
     {
         if (!$this->properties->contains($property)) {
             $this->properties[] = $property;
-            $property->setType($this);
+            $property->addType($this);
         }
 
         return $this;
@@ -73,17 +79,9 @@ class Type
     public function removeProperty(Property $property): self
     {
         if ($this->properties->removeElement($property)) {
-            // set the owning side to null (unless already changed)
-            if ($property->getType() === $this) {
-                $property->setType(null);
-            }
+            $property->removeType($this);
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->name;
     }
 }

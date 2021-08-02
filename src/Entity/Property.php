@@ -102,26 +102,34 @@ class Property
      */
     private $slug;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="properties")
-     */
-    private $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="properties")
-     */
-    private $type;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $featured;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="properties", cascade={"persist"})
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=State::class, inversedBy="properties")
+     */
+    private $state;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Type::class, inversedBy="properties")
+     */
+    private $types;
+
     
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->type = new ArrayCollection();
+        $this->types = new ArrayCollection();
     }
     
 
@@ -342,6 +350,25 @@ class Property
         return $this;
     }
 
+
+    
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    public function getFeatured()
+    {
+        return $this->featured;
+    }
+
+    public function setFeatured(bool $featured)
+    {
+        $this->featured = $featured;
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -354,32 +381,38 @@ class Property
         return $this;
     }
 
-    public function getType(): ?Type
+    public function getState(): ?State
     {
-        return $this->type;
+        return $this->state;
     }
 
-    public function setType(?Type $type): self
+    public function setState(?State $state): self
     {
-        $this->type = $type;
+        $this->state = $state;
 
         return $this;
     }
 
-    
-    public function __toString()
+    /**
+     * @return Collection|Type[]
+     */
+    public function getTypes(): Collection
     {
-        return $this->title;
+        return $this->types;
     }
 
-    public function getFeatured(): ?bool
+    public function addType(Type $type): self
     {
-        return $this->featured;
+        if (!$this->types->contains($type)) {
+            $this->types[] = $type;
+        }
+
+        return $this;
     }
 
-    public function setFeatured(bool $featured): self
+    public function removeType(Type $type): self
     {
-        $this->featured = $featured;
+        $this->types->removeElement($type);
 
         return $this;
     }

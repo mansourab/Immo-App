@@ -2,24 +2,22 @@
     {{ form_start(form, {attr: {'class': 'filter js-filter-form'}}) }}
 
         <div class="single-widget search">
-            <h3>Rechercher</h3>
+            <h3>Rechercher & Filtrer</h3>
             {{ form_row(form.q, {attr: {'class': 'form-style'}}) }}
-    {#        <button type="submit"><i class="lni lni-search-alt"></i></button>#}
         </div>
 
         <div class="single-widget">
             <h3>Filtrer</h3>
-            <span class="mb-2">Par Quartier</span>
+
+
+            <span class="mt-2 mb-2 h6">Status</span>
             <div class="select">
-                {{ form_row(form.quarter, {attr: {'class': 'form-style'}} )}}
+                {{ form_row(form.types)}}
             </div>
 
-            <span class="mt-4 mb-2">Par Type de Bien</span>
-            <div class="select">
-                {{ form_row(form.type, {attr: {'class': 'form-style'}} )}}
-            </div>
+            <hr>
 
-            <span class="mt-4 mb-2">Par Catégorie</span>
+            <span class="mb-2">Catégories</span>
             {{ form_row(form.categories) }}
 
             <div class="button mt-4">

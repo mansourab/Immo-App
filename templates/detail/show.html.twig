@@ -14,7 +14,7 @@
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="product-info">
                         <h2 class="title">{{ property.title }}</h2>
-                        <p class="location"><i class="lni lni-map-marker"></i>{{ property.quarter }}, Niamey</p>
+                        <p class="location"><i class="lni lni-map-marker"></i>{{ property.quarter }}, {{ property.state}}</p>
                         <h3 class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</h3>
                         <div class="list-info">
                             <h4>Informations</h4>
@@ -27,7 +27,12 @@
                                                 {{ category.name }}
                                             {% endfor %}
                                         </li>
-                                        <li><span>Type:</span> {{ property.type }}</li>
+                                        <li>
+                                            <span>Status:</span> 
+                                            {% for type in property.types %}
+                                                {{ type.name }} 
+                                            {% endfor %}
+                                        </li>
                                         <li>
                                             <span> {% if property.room > 1 %}
                                                     Chambres:
@@ -61,28 +66,26 @@
                         <div class="contact-info">
                             <ul>
                                 <li>
-                                    <a href="tel:+002562352589" class="call">
+                                    <a href="tel:+22789375348" class="call">
                                         <i class="lni lni-phone-set"></i>
                                         +227 89 375 348
+                                        {% for type in property.types %}
                                         <span>
-                                            {% if property.type == 'A Vendre' %}
+                                            {% if type.name == 'A Vendre' %}
                                                 Faites une proposition
                                             {% else %}
                                                 Appeler pour réserver
                                             {% endif %}
                                         </span>
+                                        {% endfor %}
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" class="mail">
+                                <li >
+                                    <a href="mailto:abdoulaye.mansour@gmail.com" class="mail">
                                         <i class="lni lni-envelope"></i>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" class="mail">
-                                        <i class="lni lni-facebook-messenger"></i>
-                                    </a>
-                                </li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -106,29 +109,18 @@
 
                         <div class="row d-flex" id="lightgallery">
                             {% for image in property.images %}
+                            
                             <a href="{{ asset('uploads/galerie/'~image.url) }}" data-exthumbimage="{{ asset('uploads/galerie/'~image.url) }}" data-src="{{ asset('uploads/galerie/'~image.url) }}" class="col-sm-4 mb-2">
                                 <img src="{{ asset('uploads/galerie/'~image.url) }}" alt="" width="262px;" height="174px;">
                             </a>
+                           
                             {% endfor %}
                         </div>
 
                     </div>
+                    
                 </div>
-                <div class="col-lg-4 col-md-5 col-12">
-                    <div class="item-details-sidebar">
-
-                        <div class="single-block author">
-                            <h3>Author</h3>
-                            <div class="content">
-                                <img src="assets/images/testimonial/testi3.jpg" alt="#">
-                                <h4>Miliya Jessy</h4>
-                                <span>Member Since May 15,2023</span>
-                                <a href="javascript:void(0)" class="see-all">See All Ads</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+            
             </div>
         </div>
     </div>

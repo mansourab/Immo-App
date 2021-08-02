@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Data\SearchData;
-use App\Entity\Quarter;
 use App\Entity\Category;
 use App\Entity\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -23,7 +22,7 @@ class SearchForm extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Entrer votre recherche'
+                    'placeholder' => 'Nom du quartier ou du Lieu'
                 ]
             ])
             ->add('categories', EntityType::class, [
@@ -33,17 +32,12 @@ class SearchForm extends AbstractType
                 'expanded' => true,
                 'multiple' => true
             ])
-            ->add('quarter', EntityType::class, [
-                'label' => false,
-                'required' => false,
-                'class' => Quarter::class,
-                'placeholder' => 'Choisir un quartier'
-            ])
-            ->add('type', EntityType::class, [
+            ->add('types', EntityType::class, [
                 'label' => false,
                 'required' => false,
                 'class' => Type::class,
-                'placeholder' => 'Choisir Type de Bien'
+                'expanded' => true,
+                'multiple' => true
             ])
             // ->add('min', NumberType::class, [
             //     'label' => false,

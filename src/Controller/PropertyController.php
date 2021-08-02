@@ -2,14 +2,12 @@
 
 namespace App\Controller;
 
-use App\Data\SearchData;
+
 use App\Entity\Image;
 use App\Entity\Property;
 use App\Form\PropertyFormType;
-use App\Form\SearchForm;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +16,9 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Flasher\Toastr\Prime\ToastrFactory;
 
-
+/**
+ * @Route("/back-office")
+ */
 class PropertyController extends AbstractController
 {
     /**
@@ -48,7 +48,7 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("property/new", name="app_property_new", methods={"GET", "POST"})
+     * @Route("/property/new", name="app_property_new", methods={"GET", "POST"})
      * 
      * @return Symfony\Component\HttpFoundation\Response
      */
@@ -56,32 +56,41 @@ class PropertyController extends AbstractController
     {
         $property = new Property;
 
+        $user = $this->getUser();
+
         $form = $this->createForm(PropertyFormType::class, $property);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Upload Image multiple
+            
             $images = $form->get('images')->getData();
 
-            // on boucle sur les images
+           
             foreach($images as $image) {
-                // on recupere un nouveau nom de fichier
+                
                 $fichier = md5(uniqid()). '.' . $image->guessExtension();
-                // On copie le fichier dans le dosiier uploads
+               
                 $image->move(
                     $this->getParameter('images_galerie'),
                     $fichier
                 );
-                // On stock l'image dans la base de donnée
+                
                 $img = new Image;
+
                 $img->setUrl($fichier);
+
                 $property->addImage($img);
+
             }
 
+            $property->setUser($user);
+
             $this->manager->persist($property);
+
             $this->manager->flush();
 
-            // $this->addFlash('success', 'Your property is added successfully');
+            
             $this->flasher->addSuccess('Annonce ajouté avec succès');
 
             return $this->redirectToRoute('app_admin_index');
@@ -93,7 +102,7 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("property/edit/{id}", name="app_property_edit")
+     * @Route("/property/edit/{id}", name="app_property_edit")
      * @param Symfony\Component\HttpFoundation\Request
      * @param App\Entity\Property
      */
@@ -101,23 +110,24 @@ class PropertyController extends AbstractController
     {
 
         $form = $this->createForm(PropertyFormType::class, $property);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Upload Image multiple
+            
             $images = $form->get('images')->getData();
 
-            // on boucle sur les images
+            
             foreach($images as $image) {
-                // on recupere un nouveau nom de fichier
+                
                 $fichier = md5(uniqid()). '.' . $image->guessExtension();
-                // On copie le fichier dans le dosiier uploads
+                
                 $image->move(
                     $this->getParameter('images_galerie'),
                     $fichier
                 );
-                // On stock l'image dans la base de donnée
+                
                 $img = new Image;
                 $img->setUrl($fichier);
                 $property->addImage($img);
@@ -125,7 +135,7 @@ class PropertyController extends AbstractController
 
             $this->manager->flush();
 
-            // $this->addFlash('success', 'Your property is updated successfully');
+            
             $this->flasher->addSuccess('Annonce édité avec succès');
 
             return $this->redirectToRoute('app_admin_index');
@@ -145,61 +155,24 @@ class PropertyController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        // On verifie si le token est valide
-        // On recupere le nom de l'image
-        // On supprime l'image
         if ($this->isCsrfTokenValid('delete'.$image->getId(), $data['_token'])) {
             $url = $image->getUrl();
 
             unlink($this->getParameter('images_galerie').'/'.$url);
 
             $em = $this->getDoctrine()->getManager();
+
             $em->remove($image);
+
             $em->flush();
 
-            // On repond en JSON
             return new JsonResponse(['success' => 1]); 
-            // $this->flasher->addSuccess('Image supprimée.');
 
         } else {
             return new JsonResponse(['error' => 'Token invalid'], 400);
-            // $this->flasher->error('Attention! Le token est invalid');
         }
     }
 
-
-    /**
-     * @Route("/search/results", name="app_search_results")
-     */
-    public function search_results(Request $request): Response
-    {
-        $data = new SearchData;
-
-        $data->page = $request->get('page', 1);
-
-        $form = $this->createForm(SearchForm::class, $data);
-        $form->handleRequest($request);
-
-        // [$min, $max] = $repo->findMinMax($data);
-
-        $properties = $this->repo->findSearch($data);
-
-        // if ($request->get('ajax')) {
-        //     return new JsonResponse([
-        //         'content' => $this->renderView('search/_properties.html.twig', ['properties' => $properties]),
-        //         'sorting' => $this->renderView('search/_sorting.html.twig', ['properties' => $properties]),
-        //         'pagination' => $this->renderView('search/_pagination.html.twig', ['properties' => $properties])
-        //     ]);
-        // }
-
-
-        return $this->render('search/index.html.twig', [
-            'properties' => $properties,
-            'form' => $form->createView(),
-            // 'min' => $min,
-            // 'max' => $max
-        ]);
-    }
 
     /**
      * @Route("/property/{id}", name="app_property_delete", methods={"POST"})
@@ -207,8 +180,11 @@ class PropertyController extends AbstractController
     public function delete_property(Request $request, Property $property)
     {
         if ($this->isCsrfTokenValid('delete'.$property->getId(), $request->request->get('_token'))) {
+
             $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->remove($property);
+
             $entityManager->flush();
 
             $this->flasher->addSuccess('Annonce supprimé avec succès.');

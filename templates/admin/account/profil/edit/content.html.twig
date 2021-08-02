@@ -17,20 +17,27 @@
                                 {{ form_start(form, {attr: {class: 'default-form-style'}}) }}
                                     <div class="row">
                                         <div class="col-md-6">
-                                            {{ form_row(form.firstname) }}
+                                            {{ form_row(form.name) }}
                                         </div>
-                                        <div class="col-md-6">
-                                            {{ form_row(form.lastname) }}
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
                                         <div class="col-md-6">
                                             {{ form_row(form.email) }}
                                         </div>
+                                        
+                                    </div>
+
+                                    <div class="row">
+                                        {# <div class="col-md-6">
+                                            {{ form_row(form.email) }}
+                                        </div> #}
                                         <div class="col-md-6">
-                                            {{ form_row(form.avatar) }}
+                                            {{ form_row(form.avatarFile) }}
                                         </div>
+
+                                        <div class="col-md-6">
+                                            <img src="{{ vich_uploader_asset(app.user) }}" width="100" height="100">
+                                        </div>
+                                        
                                     </div>
 
                                     <div class="button">

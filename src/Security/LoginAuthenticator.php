@@ -4,9 +4,9 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -31,15 +31,15 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
-    private $flashBag;
+    private $flasher;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, FlashBagInterface $flashBag)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, ToastrFactory $flasher)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
-        $this->flashBag = $flashBag;
+        $this->flasher = $flasher;
     }
 
     public function supports(Request $request)
@@ -66,6 +66,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
+
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
@@ -96,12 +97,12 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
-
         }
-        $this->flashBag->add('success', 'You are logged');
 
+        $this->flasher->addSuccess('You are now logged');
 
         return new RedirectResponse($this->urlGenerator->generate('app_admin_index'));
+        
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
