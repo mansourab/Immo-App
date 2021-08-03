@@ -7,6 +7,7 @@ use App\Entity\Quarter;
 use App\Form\QuarterFormType;
 use App\Repository\QuarterRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,9 +22,13 @@ class QuarterController extends AbstractController
      * @Route("/quarter/index", name="app_quarter_index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(QuarterRepository $repo)
+    public function index(QuarterRepository $repo, PaginatorInterface $paginator, Request $request)
     {
-        $quarters = $repo->findAll();
+        $quarters = $paginator->paginate(
+            $repo->findAll(),
+            $request->query->getInt('page', 1),
+            8
+        );
 
         return $this->render('admin/quarter/list/index.html.twig', compact('quarters'));
     }

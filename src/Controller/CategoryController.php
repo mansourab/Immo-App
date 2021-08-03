@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Flasher\Toastr\Prime\ToastrFactory;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/back-office")
@@ -28,9 +29,13 @@ class CategoryController extends AbstractController
     /**
      * @Route("/category/index", name="app_category_index")
      */
-    public function list_category(CategoryRepository $categoryRepository)
+    public function list_category(CategoryRepository $categoryRepository, PaginatorInterface $paginator, Request $request)
     {
-        $categories = $categoryRepository->findAll();
+        $categories = $paginator->paginate(
+            $categoryRepository->findAll(),
+            $request->query->getInt('page', 1),
+            8
+        );
 
         return $this->render('admin/category/list/index.html.twig', compact('categories'));
     }

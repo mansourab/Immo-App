@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'admin/partials/breadcrumb.html.twig' %}
+<section class="dashboard section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-12 col-12">
+                {% include 'admin/partials/menu.html.twig' %}
+            </div>
+            <div class="col-lg-9 col-md-12 col-12">
+                <div class="main-content">
+                    
+                    <div class="dashboard-block">
+                        <h3 class="block-title">Les annonces annulées</h3>
+
+                        <div class="my-items">
+                            <div class="item-list-title">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-5 col-md-5 col-12">
+                                        <p>Titre de l'annonce</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-12">
+                                        <p>Catégorie</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-12">
+                                        <p>Type</p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-12 align-right">
+                                        <p>Actions</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% for property in annuler %}
+
+                            {% if property.status == 'Annuler' %}
+                            
+                                <div class="single-item-list">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-5 col-md-5 col-12">
+                                            <div class="item-image">
+                                                <img src="{{ vich_uploader_asset(property) | imagine_filter('admin_property_image') }}" alt="#">
+                                                <div class="content">
+                                                    <h3 class="title"><a href="#">{{ property.title }}</a></h3>
+                                                    <span class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-12">
+                                            {% for c in property.categories %}
+                                                <p>{{ c.name }}</p>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-12">
+                                            {% for type in property.types %}
+                                                <p>{{ type.name }}</p>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-12 align-right">
+                                            <ul class="action-btn">
+                                                <li><a href="{{ path('app_property_edit', {id: property.id}) }}"><i class="lni lni-pencil"></i></a></li>
+                                            
+                                                <li>
+                                                    <form method="post" action="{{ path('app_property_delete', {'id': property.id}) }}" onsubmit="return confirm('Etes vous sure de vouloir effacer cette annonce ?');">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
+                                                        <button class="btn"><i class="lni lni-trash"></i></button>
+                                                    </form>
+                                                </li>   
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            {% endif %}
+                            
+
+
+                            {% endfor %}
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="pagination left">
+                                        {{ knp_pagination_render(annuler, 'admin/partials/pagination.html.twig') }}
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

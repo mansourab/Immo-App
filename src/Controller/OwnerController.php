@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Owner;
 use App\Form\OwnerType;
 use App\Repository\OwnerRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +20,16 @@ class OwnerController extends AbstractController
     /**
      * @Route("/owner/index", name="app_owner_index", methods={"GET"})
      */
-    public function index(OwnerRepository $ownerRepository): Response
+    public function index(OwnerRepository $ownerRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $owners = $paginator->paginate(
+            $ownerRepository->findAll(),
+            $request->query->getInt('page', 1),
+            10
+        );
+
         return $this->render('admin/owner/list/index.html.twig', [
-            'owners' => $ownerRepository->findAll(),
+            'owners' => $owners
         ]);
     }
 

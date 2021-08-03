@@ -28,14 +28,14 @@ class PropertyFormType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'required' => false,
-                'label' => 'Property Title'
+                'label' => 'Titre de l\'annonce'
             ])
             ->add('content', TextareaType::class, [
                 'required' => false,
-                'label' => 'Property Description'
+                'label' => 'Description'
             ])
             ->add('imageFile', VichImageType::class, [
-                'label' => 'Cover Image (png, jpeg, jpg)',
+                'label' => 'Image de couverture (png, jpeg, jpg)',
                 'required' => false,
                 'allow_delete' => false,
                 'download_uri' => false,
@@ -44,43 +44,43 @@ class PropertyFormType extends AbstractType
             ])
             ->add('categories', EntityType::class, [
                 'required' => false,
-                'label' => 'Choose Categories',
+                'label' => 'Catégories',
                 'class' => Category::class,
 //                'expanded' => true,
                 'multiple' => true,
             ])
             ->add('quarter', EntityType::class, [
                 'required' => false,
-                'label' => 'Lieu',
+                'label' => 'Quartier ou Lieu',
                 'class' => Quarter::class,
 
             ])
             ->add('owner', EntityType::class, [
                 'required' => false,
-                'label' => 'Property Owner',
+                'label' => 'Propriétaire',
                 'class' => Owner::class
             ])
             ->add('images', FileType::class, [
-                'label' => 'Upload Files',
+                'label' => 'Télécharger des images (12)',
                 'multiple' => true,
                 'mapped' => false,
                 'required' => false
             ])
             ->add('price', NumberType::class, [
-                'label' => 'Property Price',
+                'label' => 'Prix',
                 'required' => false,
             ])
             ->add('area', NumberType::class, [
-                'label' => 'Property Area',
+                'label' => 'Surface',
                 'required' => false,
             ])
             ->add('room', NumberType::class, [
-                'label' => 'Property Rooms',
+                'label' => 'Chambres',
                 'required' => false,
             ])
             ->add('types', EntityType::class, [
                 'required' => false,
-                'label' => 'Property Type',
+                'label' => 'Type de bien',
                 'class' => Type::class,
                 'multiple' => true
             ])
@@ -93,14 +93,17 @@ class PropertyFormType extends AbstractType
             ])
             ->add('state', EntityType::class, [
                 'required' => false,
-                'label' => 'Choose State',
+                'label' => 'Région',
                 'class' => State::class
             ])
-            // ->add('status', TextType::class, [
-            //     'required' => false,
-            //     'label' => 'Property Status'
-            // ])
-//            ->add('published', CheckboxType::class)
+            ->add('featured', CheckboxType::class, [
+                'required' => false,
+                'label' => 'VIP',
+            ])
+           ->add('published', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Publier',
+           ])
         ;
     }
 

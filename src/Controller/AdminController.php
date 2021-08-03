@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Repository\CategoryRepository;
 use App\Repository\PropertyRepository;
 use App\Repository\QuarterRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,15 +18,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
 
+    private $paginator;
+
+    public function __construct(PaginatorInterface $paginator)
+    {
+        $this->paginator = $paginator;
+    }
+
     /**
      * @Route("/index", name="app_admin_index")
      * @return Response
      */
-    public function index(PropertyRepository $repo, PaginatorInterface $paginator, Request $request, CategoryRepository $repoCat, QuarterRepository $repoQt): Response
+    public function index(PropertyRepository $repo, Request $request, CategoryRepository $repoCat, QuarterRepository $repoQt): Response
     {
         $user = new User();
 
-        $properties = $paginator->paginate(
+        $properties = $this->paginator->paginate(
             $repo->findAll(),
             $request->query->getInt('page', 1),
             3
@@ -49,16 +55,51 @@ class AdminController extends AbstractController
      * @Route("/annonces/terminer", name="app_annonce_terminer")
      * @return Response
      */
-    public function terminer(PropertyRepository $repo, EntityManagerInterface $em): Response
+    public function terminer(PropertyRepository $repo, Request $request): Response
     {
-        // $terminer = $repo->findEnd();
-        $terminer = $repo->findAll();
 
-        // $query = $em->createQuery('SELECT status FROM App\Entity\Property WHERE status = Inactif');
-        // $inactif = $query->getResult();
+        $terminer = $this->paginator->paginate(
+            $repo->findAll(),
+            $request->query->getInt('page', 1),
+            8
+        );
 
         return $this->render('admin/terminer/index.html.twig', [
             'terminer' => $terminer,
         ]);
     }
+
+    /**
+     * @Route("/annonces/annuler", name="app_annonce_annuler")
+     */
+    public function annuler(PropertyRepository $repo, Request $request)
+    {
+        $annuler = $this->paginator->paginate(
+            $repo->findAll(),
+            $request->query->getInt('page', 1),
+            8
+        );
+
+        return $this->render('admin/annuler/index.html.twig', [
+            'annuler' => $annuler
+        ]);
+    }
+
+    /**
+     * @Route("/annonces/inactive", name="app_annonce_inactive")
+     */
+    public function notPublished(PropertyRepository $repo, Request $request)
+    {
+        $properties = $this->paginator->paginate(
+            $repo->findAll(),
+            $request->query->getInt('page', 1),
+            8
+        );
+
+        return $this->render('admin/inactive/index.html.twig', [
+            'properties' => $properties
+        ]);
+    }
+
+    
 }

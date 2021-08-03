@@ -7,6 +7,7 @@ use App\Form\StateFormType;
 use App\Repository\StateRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Flasher\Toastr\Prime\ToastrFactory;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,9 +31,13 @@ class StateController extends AbstractController
     /**
      * @Route("/state/index", name="app_state_index")
      */
-    public function index(StateRepository $repo)
+    public function index(StateRepository $repo, PaginatorInterface $paginator, Request $request)
     {
-        $states = $repo->findAll();
+        $states = $paginator->paginate(
+            $repo->findAll(),
+            $request->query->getInt('page', 1),
+            8
+        );
 
         return $this->render('admin/state/list/index.html.twig', compact('states'));
     }
@@ -87,7 +92,7 @@ class StateController extends AbstractController
     /**
      * @Route("/state/{id}", name="app_state_delete", methods={"POST"})
      */
-    public function delete_category(Request $request, State $state)
+    public function delete_state(Request $request, State $state)
     {
         if ($this->isCsrfTokenValid('delete'.$state->getId(), $request->request->get('_token'))) {
 
