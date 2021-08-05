@@ -34,8 +34,6 @@
 
                             {% for property in terminer %}
 
-                            {% if property.status == 'Terminer' %}
-                            
                                 <div class="single-item-list">
                                     <div class="row align-items-center">
                                         <div class="col-lg-5 col-md-5 col-12">
@@ -72,25 +70,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                            {% endif %}
-                            
-
 
                             {% endfor %}
 
-                            {# <div class="row">
+                            <div class="row">
                                 <div class="col-12">
+
                                     <div class="pagination left">
-                                        {{ knp_pagination_render(properties, 'admin/partials/pagination.html.twig') }}
+                                        {{ knp_pagination_render(terminer, 'admin/partials/pagination.html.twig') }}
                                     </div>
 
                                 </div>
-                            </div> #}
-
+                            </div>
 
                         </div>
-
 
                     </div>
                 </div>

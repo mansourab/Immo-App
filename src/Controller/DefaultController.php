@@ -27,6 +27,8 @@ class DefaultController extends AbstractController
 
         $latestForSale = $repo->findLatestSale();
 
+        $featured = $repo->findFeatured();
+
         $niamey = $repo->findNiamey();
         $dosso = $repo->findDosso();
         $tillaberi = $repo->findTillaberi();
@@ -40,6 +42,7 @@ class DefaultController extends AbstractController
             'latest_properties' => $latestProperties,
             'latest_sale' => $latestForSale,
             'latest_rent' => $latestForRent,
+            'featured' => $featured,
             'niamey' => $niamey,
             'dosso' => $dosso,
             'tillaberi' => $tillaberi,

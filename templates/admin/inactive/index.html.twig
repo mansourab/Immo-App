@@ -32,9 +32,7 @@
                                 </div>
                             </div>
 
-                            {% for property in properties %}
-
-                            {% if property.published == false %}
+                            {% for property in inactives %}
                             
                                 <div class="single-item-list">
                                     <div class="row align-items-center">
@@ -73,15 +71,13 @@
                                     </div>
                                 </div>
                                 
-                                
-                            {% endif %}
 
                             {% endfor %}
 
                             <div class="row">
                                 <div class="col-12">
                                     <div class="pagination left">
-                                        {{ knp_pagination_render(properties, 'admin/partials/pagination.html.twig') }}
+                                        {{ knp_pagination_render(inactives, 'admin/partials/pagination.html.twig') }}
                                     </div>
 
                                 </div>

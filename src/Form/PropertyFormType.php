@@ -104,6 +104,10 @@ class PropertyFormType extends AbstractType
                 'required' => false,
                 'label' => 'Publier',
            ])
+           ->add('reference', TextType::class, [
+               'required' => false,
+               'label' => 'Référence'
+           ])
         ;
     }
 

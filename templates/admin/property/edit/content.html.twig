@@ -97,18 +97,26 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-lg-4 col-12 mt-4 mb-4">
-                                                    {{ form_row(form.state, {attr: {class: 'form-style'}}) }} 
+
+                                            <div class="row mb-4">
+                                            
+                                                <div class="col-lg-4 col-12 mt-4">
+                                                    {{ form_row(form.state, {attr: {class: 'form-style'}}) }}
                                                 </div>
 
                                                 <div class="col-lg-4 col-12 mt-4">
+                                                    {{ form_row(form.reference, {attr: {class: 'form-style'}}) }}
+                                                    
+                                                </div>
+                                                    
+                                                <div class="col-lg-2 col-12 mt-4">
                                                     {{ form_row(form.featured) }}
                                                 </div>
 
-                                                <div class="col-lg-4 col-12 mt-4">
+                                                 <div class="col-lg-2 col-12 mt-4">
                                                     {{ form_row(form.published) }}
                                                 </div>
+                                                
                                             </div>
 
                                             <div class="row">

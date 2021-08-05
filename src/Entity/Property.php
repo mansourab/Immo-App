@@ -123,6 +123,11 @@ class Property
      */
     private $types;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $reference;
+
     
     public function __construct()
     {
@@ -413,6 +418,18 @@ class Property
     public function removeType(Type $type): self
     {
         $this->types->removeElement($type);
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
 
         return $this;
     }

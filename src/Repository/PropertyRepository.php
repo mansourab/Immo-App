@@ -37,7 +37,7 @@ class PropertyRepository extends ServiceEntityRepository
         return $this->paginator->paginate(
             $query,
             $search->page,
-            3
+            9
         );
     }
 
@@ -143,7 +143,77 @@ class PropertyRepository extends ServiceEntityRepository
             ->setMaxResults(8)
             ->getQuery()
             ->getResult()
-            ;
+        ;
+    }
+
+    /**
+     * Les biens mis en avant
+     */
+    public function findFeatured()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.featured = 1')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Les annonces Terminées
+     */
+    public function findActif()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere("p.status = 'Actif'")
+            ->andWhere('p.published = 1')
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Les annonces Annuler
+     */
+    public function findAnnuler()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere("p.status = 'Annuler'")
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Les annonces Terminées
+     */
+    public function findTerminer()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere("p.status = 'Terminer'")
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Les annonces Non Publiées (Inactives)
+     */
+    public function findInactive()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.published = 0')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**

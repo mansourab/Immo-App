@@ -22,22 +22,27 @@
                                 <div class="col-md-6">
                                     <ul>
                                         <li>
-                                            <span>Catégorie:</span>
+                                            <span>Référence :</span>
+                                            {{ property.reference }}
+                                        </li>
+
+                                        <li>
+                                            <span>Catégorie :</span>
                                             {% for category in property.categories %}
                                                 {{ category.name }}
                                             {% endfor %}
                                         </li>
                                         <li>
-                                            <span>Status:</span> 
+                                            <span>Status :</span> 
                                             {% for type in property.types %}
                                                 {{ type.name }} 
                                             {% endfor %}
                                         </li>
                                         <li>
                                             <span> {% if property.room > 1 %}
-                                                    Chambres:
+                                                    Chambres :
                                                     {% else %}
-                                                    Chambre:
+                                                    Chambre :
                                                     {% endif %}
                                             </span> {{ property.room }}
                                         </li>
@@ -50,8 +55,8 @@
                                             <span>Propriétaire:</span>
                                             {{ property.owner }}
                                         </li>
-                                        <li><span>Surface:</span> {{ property.area }} m²</li>
-                                        <li><span>Galérie:</span>
+                                        <li><span>Surface :</span> {{ property.area }} m²</li>
+                                        <li><span>Galérie :</span>
                                             {{ property.images | length }} {% if property.images | length > 1 %}
                                                 images
                                                 {% else %}
@@ -105,7 +110,7 @@
                     </div>
 
                     <div class="single-block comments" data-animated-id="3">
-                        <h3>Galérie</h3>
+                        <h3><i class="lni lni-image"></i> Galérie</h3>
 
                         <div class="row d-flex" id="lightgallery">
                             {% for image in property.images %}

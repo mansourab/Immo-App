@@ -34,9 +34,9 @@ class AdminController extends AbstractController
         $user = new User();
 
         $properties = $this->paginator->paginate(
-            $repo->findAll(),
+            $repo->findActif(),
             $request->query->getInt('page', 1),
-            3
+            8
         );
 
         $categories = $repoCat->findAll();
@@ -59,7 +59,7 @@ class AdminController extends AbstractController
     {
 
         $terminer = $this->paginator->paginate(
-            $repo->findAll(),
+            $repo->findTerminer(),
             $request->query->getInt('page', 1),
             8
         );
@@ -75,7 +75,7 @@ class AdminController extends AbstractController
     public function annuler(PropertyRepository $repo, Request $request)
     {
         $annuler = $this->paginator->paginate(
-            $repo->findAll(),
+            $repo->findAnnuler(),
             $request->query->getInt('page', 1),
             8
         );
@@ -90,14 +90,14 @@ class AdminController extends AbstractController
      */
     public function notPublished(PropertyRepository $repo, Request $request)
     {
-        $properties = $this->paginator->paginate(
-            $repo->findAll(),
+        $inactives = $this->paginator->paginate(
+            $repo->findInactive(),
             $request->query->getInt('page', 1),
             8
         );
 
         return $this->render('admin/inactive/index.html.twig', [
-            'properties' => $properties
+            'inactives' => $inactives
         ]);
     }
 
