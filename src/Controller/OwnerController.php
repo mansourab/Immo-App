@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Owner;
 use App\Form\OwnerType;
 use App\Repository\OwnerRepository;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class OwnerController extends AbstractController
 {
+    /**
+     * @var ToastrFactory
+     */
+    private $flasher;
+
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
+
     /**
      * @Route("/owner/index", name="app_owner_index", methods={"GET"})
      */
@@ -52,6 +64,8 @@ class OwnerController extends AbstractController
 
             $entityManager->flush();
 
+            $this->flasher->addSuccess('Nouvel Item ajouté avec succès');
+
             return $this->redirectToRoute('app_owner_index');
         }
 
@@ -75,6 +89,8 @@ class OwnerController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->flasher->addSuccess('Item édité avec succès');
+
             return $this->redirectToRoute('app_owner_index');
         }
 
@@ -96,6 +112,8 @@ class OwnerController extends AbstractController
             $entityManager->remove($owner);
             
             $entityManager->flush();
+
+            $this->flasher->addSuccess('Item supprimé avec succès');
         }
 
         return $this->redirectToRoute('app_owner_index');

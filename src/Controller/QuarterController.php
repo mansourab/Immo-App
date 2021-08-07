@@ -7,9 +7,11 @@ use App\Entity\Quarter;
 use App\Form\QuarterFormType;
 use App\Repository\QuarterRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -17,6 +19,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class QuarterController extends AbstractController
 {
+
+    private $flasher;
+
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
 
     /**
      * @Route("/quarter/index", name="app_quarter_index")
@@ -49,6 +59,8 @@ class QuarterController extends AbstractController
             $em->persist($quarter);
             $em->flush();
 
+            $this->flasher->addSuccess('Nouveau quartier ajouté avec succès');
+
             return $this->redirectToRoute('app_quarter_index');
         }
 
@@ -71,11 +83,32 @@ class QuarterController extends AbstractController
 
             $em->flush();
 
+            $this->flasher->addSuccess('Nouveau quartier édité avec succès');
+
             return $this->redirectToRoute('app_quarter_index');
         }
 
         return $this->render('admin/quarter/edit/index.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/quarter/{id}", name="app_quarter_delete", methods={"POST"})
+     */
+    public function delete_owner(Request $request, Quarter $quarter): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$quarter->getId(), $request->request->get('_token'))) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->remove($quarter);
+            
+            $entityManager->flush();
+
+            $this->flasher->addSuccess('Quartier ou Lieu supprimé avec succès');
+        }
+
+        return $this->redirectToRoute('app_quarter_index');
     }
 }

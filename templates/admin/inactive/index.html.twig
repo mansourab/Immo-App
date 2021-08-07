@@ -12,7 +12,13 @@
                 <div class="main-content">
                     
                     <div class="dashboard-block">
-                        <h3 class="block-title">Les annonces annulées</h3>
+                        <h3 class="block-title">Les annonces non publiées</h3>
+
+                        <nav class="list-nav">
+                            <ul>
+                                <li class="active"><a href="#">Nombre d'annonces <span>{{ inactives | length }}</span></a></li>
+                            </ul>
+                        </nav>
 
                         <div class="my-items">
                             <div class="item-list-title">

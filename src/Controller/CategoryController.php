@@ -54,7 +54,7 @@ class CategoryController extends AbstractController
             $manager->persist($category);
             $manager->flush();
 
-            $this->addFlash('success', 'The category is added successfully');
+            $this->flasher->addSuccess('Catégorie ajoutée avec succès.');
 
             return $this->redirectToRoute('app_category_index');
         }

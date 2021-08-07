@@ -81,6 +81,8 @@ class StateController extends AbstractController
 
             $em->flush();
 
+            $this->flasher->addSuccess('Région éditée avec succès');
+
             return $this->redirectToRoute('app_state_index');
         }
 
@@ -102,7 +104,7 @@ class StateController extends AbstractController
             
             $entityManager->flush();
 
-            $this->flasher->addSuccess('région de bien supprimé avec succès.');
+            $this->flasher->addSuccess('région supprimé avec succès.');
 
             return $this->redirectToRoute('app_state_index');
         }

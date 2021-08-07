@@ -55,6 +55,8 @@ class TypeController extends AbstractController
 
             $em->flush();
 
+            $this->flasher->addSuccess('Type ajouté avec succès.');
+
             return $this->redirectToRoute('app_type_index');
         }
 
@@ -75,6 +77,8 @@ class TypeController extends AbstractController
             $em->persist($type);
 
             $em->flush();
+
+            $this->flasher->addSuccess('Type de bien edité avec succès.');
 
             return $this->redirectToRoute('app_type_index');
         }

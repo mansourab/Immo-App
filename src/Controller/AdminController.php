@@ -31,7 +31,10 @@ class AdminController extends AbstractController
      */
     public function index(PropertyRepository $repo, Request $request, CategoryRepository $repoCat, QuarterRepository $repoQt): Response
     {
+        // $this->denyAccessUnlessGranted('ROLE_USER');
+
         $user = new User();
+
 
         $properties = $this->paginator->paginate(
             $repo->findActif(),
