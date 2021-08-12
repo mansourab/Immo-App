@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Flasher\Toastr\Prime\ToastrFactory;
 
 /**
- * @Route("/back-office")
+ * @Route("/back/office")
  */
 class PropertyController extends AbstractController
 {

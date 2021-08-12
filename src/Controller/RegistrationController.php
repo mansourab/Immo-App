@@ -15,7 +15,7 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 
 /**
- * @Route("/back-office")
+ * @Route("/back/office")
  */
 class RegistrationController extends AbstractController
 {

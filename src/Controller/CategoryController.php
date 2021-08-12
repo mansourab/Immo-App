@@ -13,7 +13,7 @@ use Flasher\Toastr\Prime\ToastrFactory;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * @Route("/back-office")
+ * @Route("/back/office")
  */
 class CategoryController extends AbstractController
 {

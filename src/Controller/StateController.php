@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/back-office")
+ * @Route("/back/office")
  */
 class StateController extends AbstractController
 {

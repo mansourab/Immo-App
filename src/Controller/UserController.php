@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/back-office")
+ * @Route("/back/office")
  */
 class UserController extends AbstractController
 {

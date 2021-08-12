@@ -29,6 +29,7 @@ class DefaultController extends AbstractController
 
         $featured = $repo->findFeatured();
 
+
         $niamey = $repo->findNiamey();
         $dosso = $repo->findDosso();
         $tillaberi = $repo->findTillaberi();

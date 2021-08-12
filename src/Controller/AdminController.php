@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/back-office")
+ * @Route("/back/office")
  */
 class AdminController extends AbstractController
 {
@@ -31,10 +31,7 @@ class AdminController extends AbstractController
      */
     public function index(PropertyRepository $repo, Request $request, CategoryRepository $repoCat, QuarterRepository $repoQt): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_USER');
-
         $user = new User();
-
 
         $properties = $this->paginator->paginate(
             $repo->findActif(),
@@ -60,7 +57,6 @@ class AdminController extends AbstractController
      */
     public function terminer(PropertyRepository $repo, Request $request): Response
     {
-
         $terminer = $this->paginator->paginate(
             $repo->findTerminer(),
             $request->query->getInt('page', 1),

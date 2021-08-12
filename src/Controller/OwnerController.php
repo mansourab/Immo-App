@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/back-office")
+ * @Route("/back/office")
  */
 class OwnerController extends AbstractController
 {

@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/back-office")
+ * @Route("/back/office")
  */
 class QuarterController extends AbstractController
 {

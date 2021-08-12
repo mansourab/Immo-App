@@ -14,7 +14,7 @@ use Flasher\Toastr\Prime\ToastrFactory;
 
 
 /**
- * @Route("/back-office")
+ * @Route("/back/office")
  */
 class TypeController extends AbstractController
 {

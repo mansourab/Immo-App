@@ -9,9 +9,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
-/**
- * @Route("/back-office")
- */
 class SecurityController extends AbstractController
 {
     /**
@@ -19,8 +16,6 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-
         if ($this->getUser()) {
             return $this->redirectToRoute('app_admin_index');
         }
