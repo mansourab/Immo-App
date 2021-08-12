@@ -88,3 +88,9 @@ liip_imagine:
                 thumbnail:
                     size: [635, 325]
                     mode: outbound
+
+        contact_image:
+            filters:
+                thumbnail:
+                    size: [700, 644]
+                    mode: outbound

@@ -1,4 +1,6 @@
 {% for property in properties %}
+    {% if property.status == 'Actif'  %}
+    
     <div class="col-lg-4 col-md-6 col-12">
         <div class="single-item-grid">
             <div class="image">
@@ -24,4 +26,7 @@
             </div>
         </div>
     </div>
+    
+    {% endif %}
+    
 {% endfor %}

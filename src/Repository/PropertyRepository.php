@@ -34,10 +34,11 @@ class PropertyRepository extends ServiceEntityRepository
     public function findSearch(SearchData $search): PaginationInterface
     {
         $query = $this->getSearchQuery($search)->getQuery();
+
         return $this->paginator->paginate(
             $query,
             $search->page,
-            9
+            15
         );
     }
 
@@ -60,6 +61,7 @@ class PropertyRepository extends ServiceEntityRepository
             ->join('p.categories', 'c')
             ->join('p.quarter', 'l')
             ->join('p.types', 't')
+            ->orderBy('p.createdAt', 'DESC')
         ;
 
 

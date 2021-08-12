@@ -59,7 +59,7 @@
                         <div class="single-info contact-social">
                             <h3>Réseaux sociaux</h3>
                             <ul>
-                                <li><a href="#"><i class="lni lni-facebook-original"></i></a></li>
+                                <li><a href="{{ facebook }}"><i class="lni lni-facebook-original"></i></a></li>
                                 <li><a href="#"><i class="lni lni-twitter-original"></i></a></li>
                                 <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
                                 <li><a href="#"><i class="lni lni-whatsapp"></i></a></li>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-12">
-                    <img src="{{ asset('static/contact.jpg') }}" alt="" width="700" height="500">
+                    <img src="{{ asset('static/contact_image.png' | imagine_filter('contact_image')) }}" alt="">
                 </div>
             </div>
         </div>

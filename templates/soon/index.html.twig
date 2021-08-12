@@ -3,22 +3,26 @@
 {% block body %}
 
 <div class="coming-soon">
+
     <div class="verticle-lines">
         <div class="vlines one"></div>
         <div class="vlines two"></div>
         <div class="vlines three"></div>
         <div class="vlines four"></div>
     </div>
+
     <div class="d-table">
         <div class="d-table-cell">
             <div class="container">
                 <div class="soon-content">
+
                     <div class="text">
                         <h2>A vénir, bientôt</h2>
                         <p>L'application mobile de haya sera disponible dans un futur proche.<br>
                             Restez informer sur les réseaux sociaux.
                         </p>
                     </div>
+
                     <div class="inner-content">
                         <div class="box">
                             <a href="{{ facebook }}">
@@ -28,32 +32,36 @@
                         </div>
 
                         <div class="box">
-                            <a href="{{ facebook }}">
+                            <a href="#">
                                 <h1 id="days"><i class="lni lni-twitter-original"></i></h1>
                                 <h2 id="hourstxt">Twitter</h2>
                             <a>
                         </div>
 
                         <div class="box">
-                            <a href="{{ facebook }}">
+                            <a href="#">
                                 <h1 id="days"><i class="lni lni-linkedin-original"></i></h1>
                                 <h2 id="minutestxt">LinkedIn</h2>
                             </a>
                         </div>
 
                     </div>
+
                     <div style="background: rgb(204, 24, 24);" class="alert">
                         <h1 style="padding: 50px 80px;color: white;">We are sorry, Event ended ! </h1>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+    
 </div>
 
 {% endblock %}
 
 {% block javascripts %}
+
 <script>
     window.onload = function () {
         window.setTimeout(fadeout, 500);
@@ -64,36 +72,6 @@
         document.querySelector('.preloader').style.display = 'none';
     }
 </script>
-<script>
-    const finaleDate = new Date("February 15, 2023 00:00:00").getTime();
 
-    const timer = () => {
-        const now = new Date().getTime();
-        let diff = finaleDate - now;
-        if (diff < 0) {
-            document.querySelector('.alert').style.display = 'block';
-            document.querySelector('.container').style.display = 'none';
-        }
-
-        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        let hours = Math.floor(diff % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-        let minutes = Math.floor(diff % (1000 * 60 * 60) / (1000 * 60));
-        let seconds = Math.floor(diff % (1000 * 60) / 1000);
-
-        days <= 99 ? days = `0${days}` : days;
-        days <= 9 ? days = `00${days}` : days;
-        hours <= 9 ? hours = `0${hours}` : hours;
-        minutes <= 9 ? minutes = `0${minutes}` : minutes;
-        seconds <= 9 ? seconds = `0${seconds}` : seconds;
-
-        document.querySelector('#days').textContent = days;
-        document.querySelector('#hours').textContent = hours;
-        document.querySelector('#minutes').textContent = minutes;
-        document.querySelector('#seconds').textContent = seconds;
-
-    }
-    timer();
-    setInterval(timer, 1000);
-</script>
 
 {% endblock %}

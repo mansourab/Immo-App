@@ -46,7 +46,6 @@ class PropertyFormType extends AbstractType
                 'required' => false,
                 'label' => 'Catégories',
                 'class' => Category::class,
-//                'expanded' => true,
                 'multiple' => true,
             ])
             ->add('quarter', EntityType::class, [

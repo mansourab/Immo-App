@@ -21,7 +21,7 @@ class SearchForm extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Nom du quartier ou du Lieu'
+                    'placeholder' => 'Quartier ou Lieu...'
                 ]
             ])
             ->add('categories', EntityType::class, [
