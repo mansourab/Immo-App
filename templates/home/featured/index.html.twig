@@ -10,9 +10,6 @@
         <div class="single-head">
             <div class="row">
                 {% for property in featured %}
-
-                {# {% if property.featured %} #}
-                
                     
                 <div class="col-lg-4 col-md-6 col-12">
 
@@ -35,7 +32,7 @@
                         <div class="content">
                             <div class="top-content">
                                 {% for category in property.categories %}
-                                    <a href="#" class="tag">{{ category.name }}</a>
+                                    <span class="tag">{{ category.name }}</span>
                                 {% endfor %}
                                 <h3 class="title">
                                     <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
@@ -52,8 +49,6 @@
                         </div>
                     </div>
                 </div>
-
-                {# {% endif %} #}
 
                 {% endfor %}
             </div>

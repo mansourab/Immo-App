@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    
+    <div class="error-area">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="error-content">
+                        <h1>404</h1>
+                        <h2>On dirait que vous etes perdu</h2>
+                        <p>La page que vous rechercher n'est pas disponible</p>
+                        <div class="button">
+                            <a href="{{ path('app_home') }}" class="btn">Allez a la page d'accueil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,31 +1,35 @@
 {% for property in properties %}
     {% if property.status == 'Actif'  %}
-    
-    <div class="col-lg-4 col-md-6 col-12">
-        <div class="single-item-grid">
-            <div class="image">
-                <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}"><img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb')}}" alt="{{ property.title }}"></a>
-                <i class="cross-badge lni lni-bolt"></i>
-                {% for type in property.types %}
-                    <span class="flat-badge sale">{{ type.name }}</span>
-                {% endfor %}
-            </div>
-            <div class="content">
-                {% for category in property.categories %}
-                    <a href="#" class="tag">{{ category.name }}</a>
-                {% endfor %}
 
-                <h3 class="title">
-                    <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
-                </h3>
-                <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                        </i>{{ property.quarter }}</a></p>
-                <ul class="info">
-                    <li class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</li>
-                </ul>
+        {% if property.published == true %}
+    
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-item-grid">
+                    <div class="image">
+                        <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}"><img src="{{ vich_uploader_asset(property) | imagine_filter('my_card_thumb')}}" alt="{{ property.title }}"></a>
+                        <i class="cross-badge lni lni-bolt"></i>
+                        {% for type in property.types %}
+                            <span class="flat-badge sale">{{ type.name }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="content">
+                        {% for category in property.categories %}
+                            <a href="#" class="tag">{{ category.name }}</a>
+                        {% endfor %}
+
+                        <h3 class="title">
+                            <a href="{{ path('app_annonce_detail', {slug: property.slug}) }}">{{ property.title }}</a>
+                        </h3>
+                        <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
+                                </i>{{ property.quarter }}</a></p>
+                        <ul class="info">
+                            <li class="price">{{ property.price | number_format(0, ',', '.') }} Fcfa</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        
+        {% endif %}
     
     {% endif %}
     

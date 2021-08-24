@@ -226,6 +226,8 @@ class PropertyRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->join('p.types', 's')
             ->andWhere("s.name = 'A Vendre'")
+            ->andWhere("p.status = 'Actif'")
+            ->andWhere("p.published = true")
             ->getQuery()
             ->getResult()
         ;
@@ -239,6 +241,8 @@ class PropertyRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->join('p.types', 's')
             ->andWhere("s.name = 'A Louer'")
+            ->andWhere("p.status = 'Actif'")
+            ->andWhere("p.published = true")
             ->getQuery()
             ->getResult()
         ;
