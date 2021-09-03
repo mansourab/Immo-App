@@ -95,7 +95,8 @@
             "@auto-scripts" 
         ],
         "compile": [
-            "php bin/console doctrine:schema:update --force"
+            "php bin/console doctrine:schema:update --force",
+            "php bin/console hautelook:fixtures:load --no-interaction"
         ],
         "post-update-cmd": [
             "@auto-scripts"
