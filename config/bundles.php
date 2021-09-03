@@ -19,8 +19,8 @@ return [
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
     Flasher\Symfony\FlasherSymfonyBundle::class => ['all' => true],
     Flasher\Toastr\Symfony\FlasherToastrSymfonyBundle::class => ['all' => true],
-    Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['dev' => true, 'test' => true],
-    Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle::class => ['dev' => true, 'test' => true],
-    Hautelook\AliceBundle\HautelookAliceBundle::class => ['dev' => true, 'test' => true],
-    Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
+    Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['all' => true, 'test' => true],
+    Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle::class => ['all' => true, 'test' => true],
+    Hautelook\AliceBundle\HautelookAliceBundle::class => ['all' => true, 'test' => true],
+    Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true, 'test' => true],
 ];
