@@ -66,7 +66,7 @@ class DefaultController extends AbstractController
 
         return $this->render('detail/index.html.twig', [
             'property' => $property,
-            'properties' => $properties
+            'properties' => $properties,
         ]);
     }
 
@@ -90,8 +90,7 @@ class DefaultController extends AbstractController
         if ($request->get('ajax')) {
             return new JsonResponse([
                 'content' => $this->renderView('list/content/card.html.twig', ['properties' => $properties]),
-                // 'sorting' => $this->renderView('list/content/sorting.html.twig', ['properties' => $properties]),
-                'pagination' => $this->renderView('list/content/pagination.html.twig', ['properties' => $properties])
+                'pagination' => $this->renderView('list/content/pagination.html.twig', ['properties' => $properties]),
             ]);
         }
 

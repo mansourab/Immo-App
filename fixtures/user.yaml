@@ -1,0 +1,6 @@
+App\Entity\User:
+    user_{1}:
+      email: 'admin@exemple.com'
+      password: 'admin123'
+      name: '<firstName()> <lastName()>'
+      avatar: https://i.pravatar.cc/300

@@ -6,13 +6,11 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Entity\Property;
 use App\Form\PropertyFormType;
-use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Flasher\Toastr\Prime\ToastrFactory;
 
@@ -21,15 +19,6 @@ use Flasher\Toastr\Prime\ToastrFactory;
  */
 class PropertyController extends AbstractController
 {
-    /**
-     * @var PropertyRepository
-     */
-    private $repo;
-
-    /**
-     * @var PaginatorInterface
-     */
-    private $paginator;
 
     /**
      * @var EntityManagerInterface
@@ -39,10 +28,8 @@ class PropertyController extends AbstractController
     private $flasher;
 
 
-    public function __construct(PropertyRepository $propertyRepository, PaginatorInterface $paginator, EntityManagerInterface $manager, ToastrFactory $flasher)
+    public function __construct(EntityManagerInterface $manager, ToastrFactory $flasher)
     {
-        $this->repo = $propertyRepository;
-        $this->paginator = $paginator;
         $this->manager = $manager;
         $this->flasher = $flasher;
     }

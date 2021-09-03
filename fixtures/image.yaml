@@ -1,0 +1,3 @@
+App\Entity\Image:
+    image_{1..100}:
+      url: http://picsum.photos/id/<numberBetween(400, 800)>

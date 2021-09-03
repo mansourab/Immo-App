@@ -1,0 +1,3 @@
+App\Entity\Type:
+  type_{1..8}:
+    name: <name()>

@@ -14,9 +14,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 
-/**
- * @Route("/back/office")
- */
+// /**
+//  * @Route("/back/office")
+//  */
 class RegistrationController extends AbstractController
 {
     /**

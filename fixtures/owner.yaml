@@ -1,0 +1,6 @@
+App\Entity\Owner:
+  owner_{1..10}:
+    name: <name()>
+    email: <email()>
+    phone: <numberBetween(564, 2589)>
+    address: <city()>

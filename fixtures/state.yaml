@@ -1,0 +1,3 @@
+App\Entity\State:
+    state_{1..8}:
+      name: <city()>
